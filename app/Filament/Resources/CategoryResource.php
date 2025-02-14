@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -42,31 +41,31 @@ class CategoryResource extends Resource
                                 ->required()
                                 ->maxLength(255)
                                 ->live(onBlur: true)
-                                ->afterStateUpdated(fn(string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                                ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')
                                 ->required()
                                 ->disabled()
                                 ->dehydrated()
                                 ->maxLength(255)
-                                ->unique(Category::class, 'slug', ignoreRecord: true)
+                                ->unique(Category::class, 'slug', ignoreRecord: true),
                         ]),
-                        FileUpload::make('image')
-                                ->label('Изображение')
-                                ->image()
-                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                                ->maxSize(2048)
-                                ->validationMessages([
-                                    'max' => 'Размер файла не должен превышать 2 МБ.',
-                                ])
-                                ->helperText('Допустимые форматы изображений: JPG, PNG, WebP. Максимальный размер: 2 МБ')
-                                ->hidden(fn ($record) => $record && !$record->image)
-                                ->directory('categories'),
-                        Toggle::make('is_active')
-                            ->label('Опубликовать')
-                            ->default(false)
+                    FileUpload::make('image')
+                        ->label('Изображение')
+                        ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                        ->maxSize(2048)
+                        ->validationMessages([
+                            'max' => 'Размер файла не должен превышать 2 МБ.',
+                        ])
+                        ->helperText('Допустимые форматы изображений: JPG, PNG, WebP. Максимальный размер: 2 МБ')
+                        ->hidden(fn ($record) => $record && ! $record->image)
+                        ->directory('categories'),
+                    Toggle::make('is_active')
+                        ->label('Опубликовать')
+                        ->default(false),
 
-                ])
+                ]),
             ]);
     }
 
