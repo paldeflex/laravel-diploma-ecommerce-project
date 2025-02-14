@@ -2,13 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-
 use Carbon\Carbon;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Infolist;
+use Filament\Tables\Table;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
