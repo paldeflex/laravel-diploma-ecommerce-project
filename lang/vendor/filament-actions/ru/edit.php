@@ -4,11 +4,11 @@ return [
 
     'single' => [
 
-        'label' => 'Изменить',
+        'label' => 'Редактировать',
 
         'modal' => [
 
-            'heading' => 'Изменить :label',
+            'heading' => 'Редактировать :label',
 
             'actions' => [
 

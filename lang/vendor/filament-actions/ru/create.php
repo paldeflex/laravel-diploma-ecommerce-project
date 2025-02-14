@@ -4,20 +4,20 @@ return [
 
     'single' => [
 
-        'label' => 'Создать',
+        'label' => 'Добавить',
 
         'modal' => [
 
-            'heading' => 'Создать :label',
+            'heading' => 'Добавить :label',
 
             'actions' => [
 
                 'create' => [
-                    'label' => 'Создать',
+                    'label' => 'Добавить',
                 ],
 
                 'create_another' => [
-                    'label' => 'Создать и добавить ещё',
+                    'label' => 'Сохранить и добавить',
                 ],
 
             ],

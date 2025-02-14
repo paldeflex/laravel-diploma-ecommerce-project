@@ -80,7 +80,7 @@ return [
         ],
 
         'enable_reordering' => [
-            'label' => 'Изменить порядок',
+            'label' => 'Поменять порядок',
         ],
 
         'filter' => [
@@ -105,7 +105,7 @@ return [
 
         'heading' => 'Записи не найдены',
 
-        'description' => 'Создать :model для старта.',
+        'description' => 'Добавить :model для старта.',
 
     ],
 
@@ -182,7 +182,7 @@ return [
 
     ],
 
-    'reorder_indicator' => 'Перетягивайте записи, чтобы изменить порядок.',
+    'reorder_indicator' => 'Перетягивайте записи, чтобы поменять порядок.',
 
     'selection_indicator' => [
 
@@ -195,7 +195,7 @@ return [
             ],
 
             'deselect_all' => [
-                'label' => 'Убрать выделение со всех',
+                'label' => 'Снять выделение со всех',
             ],
 
         ],
