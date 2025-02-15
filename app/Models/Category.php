@@ -28,4 +28,11 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getImageUrlAttribute(): string
+    {
+        return $this->image
+            ? asset("storage/{$this->image}")
+            : asset('images/product-not-found.webp');
+    }
 }

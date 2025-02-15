@@ -16,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -79,7 +80,7 @@ class CategoryResource extends Resource
                 TextColumn::make('name')
                     ->label('Название')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image')
+                ImageColumn::make('image_url')
                     ->label('Изображение'),
                 TextColumn::make('slug')
                     ->label('Человекопонятный URL')
