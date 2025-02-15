@@ -47,7 +47,6 @@ class CoatingTypeResource extends Resource
                                 ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')
-                                ->required()
                                 ->readOnly()
                                 ->dehydrated()
                                 ->maxLength(255)
