@@ -16,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
@@ -75,25 +76,25 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Название')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Изображение'),
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label('Человекопонятный URL')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('is_active')
+                TextColumn::make('is_active')
                     ->label('Опубликована')
                     ->badge()
                     ->formatStateUsing(fn ($state) => $state ? 'Да' : 'Нет')
                     ->color(fn ($state) => $state ? 'success' : 'danger'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label('Добавлено')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label('Изменено')
                     ->dateTime()
                     ->sortable()
