@@ -24,6 +24,7 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static ?string $pluralModelLabel = 'Категории';
 
