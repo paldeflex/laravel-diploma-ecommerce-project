@@ -10,7 +10,6 @@ class CoatingType extends Model
     protected $fillable = [
         'name',
         'slug',
-        'image',
         'is_active',
     ];
 
