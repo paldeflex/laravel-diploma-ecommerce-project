@@ -34,19 +34,17 @@ class UserResource extends Resource
                     ->schema([
                         TextInput::make('name')
                             ->label('Имя')
-                            ->required(),
-
+                            ->required()
+                            ->maxLength(255),
                         TextInput::make('email')
                             ->label('Электронная почта')
                             ->email()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true)
                             ->required(),
-
                         DateTimePicker::make('email_verified_at')
                             ->label('Дата подтверждения электронной почты')
                             ->default(now()),
-
                         TextInput::make('password')
                             ->label('Пароль')
                             ->password()
@@ -63,20 +61,23 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Имя')
-                    ->searchable(),
-
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Электронная почта')
-                    ->searchable(),
-
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->label('Дата подтверждения эл. почты')
                     ->dateTime()
                     ->placeholder('Не подтверждён')
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата создания')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Дата обновления')
                     ->dateTime()
                     ->sortable(),
             ])
