@@ -2,50 +2,41 @@
 
 namespace Database\Seeders;
 
-use App\Models\CoatingType;
-use App\Models\Product;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
+use App\Models\CoatingType;
 use Illuminate\Support\Facades\DB;
 use Random\RandomException;
 
 class CoatingTypeProductSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
      * @throws RandomException
      */
     public function run(): void
     {
-        $products = Product::pluck('id')->toArray();
-        $coatingTypes = CoatingType::pluck('id')->toArray();
+        $products = Product::all();
+        $coatingTypes = CoatingType::all();
 
-        if (empty($products) || empty($coatingTypes)) {
+        if ($products->isEmpty() || $coatingTypes->isEmpty()) {
             $this->call([
                 ProductSeeder::class,
                 CoatingTypeSeeder::class,
             ]);
-
-            $products = Product::pluck('id')->toArray();
-            $coatingTypes = CoatingType::pluck('id')->toArray();
         }
 
         $data = [];
-        $coatingCount = count($coatingTypes);
 
-        foreach ($products as $index => $productId) {
-            $startIndex = ($index * 2) % $coatingCount;
-            $coverCount = random_int(1, 3);
-            foreach (array_slice($coatingTypes, $startIndex, $coverCount) as $coatingId) {
+        foreach ($products as $product) {
+            foreach ($coatingTypes->random(random_int(1, 3)) as $coating) {
                 $data[] = [
-                    'product_id' => $productId,
-                    'coating_type_id' => $coatingId,
+                    'product_id' => $product->id,
+                    'coating_type_id' => $coating->id,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
             }
         }
-
 
         DB::table('coating_type_product')->insert($data);
     }
