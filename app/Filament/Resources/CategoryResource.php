@@ -88,6 +88,7 @@ class CategoryResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Название')
+                    ->sortable()
                     ->searchable(),
                 ImageColumn::make('image_url')
                     ->label('Изображение'),
