@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use function Pest\Livewire\livewire;
 use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use App\Models\Category;
 use Illuminate\Support\Str;
+
+uses(RefreshDatabase::class);
 
 it('can create a category', function () {
     $newData = [
