@@ -130,7 +130,8 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Название')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('slug')
                     ->label('Человекопонятный URL')
                     ->searchable(),
