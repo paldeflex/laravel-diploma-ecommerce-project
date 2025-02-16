@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
     protected $fillable = [
         'category_id',
-        'coating_type_id',
         'name',
         'slug',
         'description',
+        'images',
         'price',
         'is_active',
         'is_featured',
@@ -26,19 +27,14 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function coatingType(): BelongsTo
+    public function coatingTypes(): BelongsToMany
     {
-        return $this->belongsTo(CoatingType::class);
+        return $this->belongsToMany(CoatingType::class, 'coating_type_product');
     }
 
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
-    }
-
-    public function images(): HasMany
-    {
-        return $this->hasMany(Image::class);
     }
 
     protected function casts(): array
@@ -48,6 +44,7 @@ class Product extends Model
             'is_featured' => 'boolean',
             'in_stock' => 'boolean',
             'on_sale' => 'boolean',
+            'images' => 'array',
         ];
     }
 }

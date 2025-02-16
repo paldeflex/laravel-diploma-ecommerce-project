@@ -10,6 +10,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -44,8 +45,13 @@ class CategoryResource extends Resource
                                 ->label('Название')
                                 ->required()
                                 ->maxLength(255)
-                                ->debounce(1000)
-                                ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                    if (($get('slug') ?? '') !== Str::slug($old)) {
+                                        return;
+                                    }
+                                    $set('slug', Str::slug($state));
+                                }),
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')
                                 ->readOnly()
@@ -62,7 +68,7 @@ class CategoryResource extends Resource
                             'max' => 'Размер файла не должен превышать 2 МБ.',
                         ])
                         ->helperText('Допустимые форматы изображений: JPG, PNG, WebP. Максимальный размер: 2 МБ')
-                        ->hidden(fn ($record) => $record && ! $record->image)
+                        ->hidden(fn (string $operation, $record) => $operation === 'view' && $record && ! $record->image)
                         ->directory('categories'),
                     Toggle::make('is_active')
                         ->label('Опубликовать')

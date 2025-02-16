@@ -43,7 +43,7 @@ class CoatingTypeResource extends Resource
                                 ->label('Название')
                                 ->required()
                                 ->maxLength(255)
-                                ->debounce(1000)
+                                ->live(onBlur: true)
                                 ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')

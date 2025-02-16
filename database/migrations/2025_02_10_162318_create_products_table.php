@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('coating_type_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->json('images')->nullable();
             $table->longText('description')->nullable();
             $table->decimal('price', 10);
             $table->boolean('is_active')->default(true);
