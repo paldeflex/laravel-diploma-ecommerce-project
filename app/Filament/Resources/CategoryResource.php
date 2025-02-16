@@ -12,14 +12,18 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
@@ -114,13 +118,51 @@ class CategoryResource extends Resource
                     [
                         ViewAction::make(),
                         EditAction::make(),
-                        DeleteAction::make(),
+                        DeleteAction::make()
+                            ->action(function ($record) {
+                                $count = $record->products()->count();
+
+                                if ($record->products()->count() > 0) {
+                                    Notification::make()
+                                        ->danger()
+                                        ->title('Нельзя удалить категорию')
+                                        ->body("Количество продуктов в категории: {$count}. Сначала удалите или перенесите в другую категорию.")
+                                        ->send();
+                                    return;
+                                }
+
+                                $record->delete();
+                            })
                     ]
                 ),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->action(function (Collection $records) {
+                            $recordsWithProducts = $records->filter(
+                                fn ($record) => $record->products()->count() > 0
+                            );
+
+                            if ($recordsWithProducts->isNotEmpty()) {
+                                $count = $recordsWithProducts->count();
+
+                                Notification::make()
+                                    ->danger()
+                                    ->title('Нельзя удалить некоторые категории')
+                                    ->body("Количество категорий в которых есть продукты: {$count}. Удаление невозможно.")
+                                    ->send();
+                                return;
+                            }
+
+                            $records->each->delete();
+
+                            Notification::make()
+                                ->success()
+                                ->title('Успешно')
+                                ->body('Все выбранные категории удалены.')
+                                ->send();
+                        }),
                 ]),
             ]);
     }
