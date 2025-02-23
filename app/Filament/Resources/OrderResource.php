@@ -222,6 +222,7 @@ class OrderResource extends Resource
                 ->sortable(),
                 TextColumn::make('shipping_method')
                     ->label('Способ доставки')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
