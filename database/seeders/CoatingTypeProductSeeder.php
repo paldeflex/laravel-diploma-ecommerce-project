@@ -10,9 +10,6 @@ use Random\RandomException;
 
 class CoatingTypeProductSeeder extends Seeder
 {
-    /**
-     * @throws RandomException
-     */
     public function run(): void
     {
         $products = Product::all();
@@ -23,21 +20,16 @@ class CoatingTypeProductSeeder extends Seeder
                 ProductSeeder::class,
                 CoatingTypeSeeder::class,
             ]);
+
+            $products = Product::all();
+            $coatingTypes = CoatingType::all();
         }
 
-        $data = [];
-
-        foreach ($products as $product) {
-            foreach ($coatingTypes->random(random_int(1, 3)) as $coating) {
-                $data[] = [
-                    'product_id' => $product->id,
-                    'coating_type_id' => $coating->id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-            }
-        }
-
-        DB::table('coating_type_product')->insert($data);
+        $products->each(/**
+         * @throws RandomException
+         */ function($product) use ($coatingTypes) {
+            $randomCoatings = $coatingTypes->random(random_int(1, 3));
+            $product->coatingTypes()->attach($randomCoatings->pluck('id')->toArray());
+        });
     }
 }

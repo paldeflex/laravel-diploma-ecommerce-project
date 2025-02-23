@@ -55,6 +55,11 @@ class ProductResource extends Resource
                             ->maxLength(255)
                             ->readOnly()
                             ->unique(Product::class, 'slug', ignoreRecord: true),
+                        TextInput::make('price')
+                            ->label('Стоимость')
+                            ->numeric()
+                            ->required()
+                            ->prefix('₽')->columnSpanFull(),
                         MarkdownEditor::make('description')
                             ->label('Описание')
                             ->columnSpanFull()
@@ -80,13 +85,7 @@ class ProductResource extends Resource
                     ]),
                 ])->columnSpan(2),
                 Group::make()->schema([
-                    Section::make('Цены')->schema([
-                        TextInput::make('price')
-                            ->label('Стоимость в рублях')
-                            ->numeric()
-                            ->required()
-                            ->prefix('₽'),
-                    ]),
+
                     Section::make('Принадлежность')->schema([
                         Select::make('category_id')
                             ->label('Категория')

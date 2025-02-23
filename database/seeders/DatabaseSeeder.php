@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CoatingTypeSeeder::class,
             ProductSeeder::class,
             CoatingTypeProductSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

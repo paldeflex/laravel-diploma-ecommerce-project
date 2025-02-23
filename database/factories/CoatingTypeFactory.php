@@ -21,9 +21,11 @@ class CoatingTypeFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->unique()->word();
+
         return [
             'name' => $this->faker->word(),
-            'slug' => Str::slug($this->faker->word()),
+            'slug' =>Str::slug($name),
             'is_active' => $this->faker->boolean(),
         ];
     }
