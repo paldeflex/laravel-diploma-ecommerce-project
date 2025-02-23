@@ -1,14 +1,15 @@
 <?php
 
-use App\Models\Category;
-use App\Filament\Resources\CategoryResource\Pages\ListCategories;
 use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use App\Filament\Resources\CategoryResource\Pages\EditCategory;
+use App\Filament\Resources\CategoryResource\Pages\ListCategories;
+use App\Models\Category;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Support\Str;
-use function Pest\Livewire\livewire;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     DB::table('categories')->truncate();
@@ -67,7 +68,7 @@ it('can create a new category', function () {
 
     livewire(CreateCategory::class)
         ->fillForm([
-            'name'      => $record->name,
+            'name' => $record->name,
             'is_active' => $record->is_active,
         ])
         ->assertActionExists('create')
@@ -75,8 +76,8 @@ it('can create a new category', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('categories', [
-        'name'      => $record->name,
-        'slug'      => Str::slug($record->name),
+        'name' => $record->name,
+        'slug' => Str::slug($record->name),
         'is_active' => $record->is_active,
     ]);
 });
@@ -87,7 +88,7 @@ it('can update an existing category', function () {
 
     livewire(EditCategory::class, ['record' => $record->getRouteKey()])
         ->fillForm([
-            'name'      => $newRecord->name,
+            'name' => $newRecord->name,
             'is_active' => $newRecord->is_active,
         ])
         ->assertActionExists('save')
@@ -95,8 +96,8 @@ it('can update an existing category', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('categories', [
-        'id'        => $record->id,
-        'name'      => $newRecord->name,
+        'id' => $record->id,
+        'name' => $newRecord->name,
         'is_active' => $newRecord->is_active,
     ]);
 });

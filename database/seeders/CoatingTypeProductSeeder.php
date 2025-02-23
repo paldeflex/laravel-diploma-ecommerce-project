@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Product;
 use App\Models\CoatingType;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use Illuminate\Database\Seeder;
 use Random\RandomException;
 
 class CoatingTypeProductSeeder extends Seeder
@@ -27,7 +26,7 @@ class CoatingTypeProductSeeder extends Seeder
 
         $products->each(/**
          * @throws RandomException
-         */ function($product) use ($coatingTypes) {
+         */ function ($product) use ($coatingTypes) {
             $randomCoatings = $coatingTypes->random(random_int(1, 3));
             $product->coatingTypes()->attach($randomCoatings->pluck('id')->toArray());
         });

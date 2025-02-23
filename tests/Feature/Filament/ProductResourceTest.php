@@ -1,8 +1,8 @@
 <?php
 
-use App\Filament\Resources\ProductResource\Pages\ListProducts;
 use App\Filament\Resources\ProductResource\Pages\CreateProduct;
 use App\Filament\Resources\ProductResource\Pages\EditProduct;
+use App\Filament\Resources\ProductResource\Pages\ListProducts;
 use App\Models\Category;
 use App\Models\CoatingType;
 use App\Models\Product;
@@ -10,6 +10,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
@@ -92,7 +93,7 @@ it('can search by table columns', function (string $column) {
 })->with(['name', 'slug']);
 
 it('can create a new product', function () {
-    $category     = Category::factory()->create();
+    $category = Category::factory()->create();
     $coatingType1 = CoatingType::factory()->create();
     $coatingType2 = CoatingType::factory()->create();
 
@@ -100,21 +101,21 @@ it('can create a new product', function () {
 
     livewire(CreateProduct::class)
         ->fillForm([
-            'name'          => $record->name,
-            'price'         => $record->price,
-            'in_stock'      => $record->in_stock,
-            'is_featured'   => $record->is_featured,
-            'is_active'     => $record->is_active,
-            'on_sale'       => $record->on_sale,
-            'category_id'   => $category->id,
-            'coatingTypes'  => [$coatingType1->id, $coatingType2->id],
+            'name' => $record->name,
+            'price' => $record->price,
+            'in_stock' => $record->in_stock,
+            'is_featured' => $record->is_featured,
+            'is_active' => $record->is_active,
+            'on_sale' => $record->on_sale,
+            'category_id' => $category->id,
+            'coatingTypes' => [$coatingType1->id, $coatingType2->id],
         ])
         ->assertActionExists('create')
         ->call('create')
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('products', [
-        'name'  => $record->name,
+        'name' => $record->name,
         'price' => $record->price,
     ]);
 });
@@ -132,21 +133,21 @@ it('can update an existing product', function () {
     livewire(EditProduct::class, ['record' => $record->getRouteKey()])
         ->fillForm([
             'coatingTypes' => [$coatingType1->id, $coatingType2->id],
-            'category_id'  => $record->category_id,
-            'name'         => $newRecord->name,
-            'price'        => $newRecord->price,
-            'in_stock'     => $newRecord->in_stock,
-            'is_featured'  => $newRecord->is_featured,
-            'is_active'    => $newRecord->is_active,
-            'on_sale'      => $newRecord->on_sale,
+            'category_id' => $record->category_id,
+            'name' => $newRecord->name,
+            'price' => $newRecord->price,
+            'in_stock' => $newRecord->in_stock,
+            'is_featured' => $newRecord->is_featured,
+            'is_active' => $newRecord->is_active,
+            'on_sale' => $newRecord->on_sale,
         ])
         ->assertActionExists('save')
         ->call('save')
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('products', [
-        'id'    => $record->id,
-        'name'  => $newRecord->name,
+        'id' => $record->id,
+        'name' => $newRecord->name,
         'price' => $newRecord->price,
     ]);
 });

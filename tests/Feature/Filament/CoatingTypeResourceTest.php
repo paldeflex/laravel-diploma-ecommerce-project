@@ -1,13 +1,14 @@
 <?php
 
-use App\Models\CoatingType;
-use App\Filament\Resources\CoatingTypeResource\Pages\ListCoatingTypes;
 use App\Filament\Resources\CoatingTypeResource\Pages\CreateCoatingType;
 use App\Filament\Resources\CoatingTypeResource\Pages\EditCoatingType;
+use App\Filament\Resources\CoatingTypeResource\Pages\ListCoatingTypes;
+use App\Models\CoatingType;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
@@ -66,7 +67,7 @@ it('can create a new coating type', function () {
 
     livewire(CreateCoatingType::class)
         ->fillForm([
-            'name'      => $record->name,
+            'name' => $record->name,
             'is_active' => $record->is_active,
         ])
         ->assertActionExists('create')
@@ -74,8 +75,8 @@ it('can create a new coating type', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('coating_types', [
-        'name'      => $record->name,
-        'slug'      => Str::slug($record->name),
+        'name' => $record->name,
+        'slug' => Str::slug($record->name),
         'is_active' => $record->is_active,
     ]);
 });
@@ -86,7 +87,7 @@ it('can update an existing coating type', function () {
 
     livewire(EditCoatingType::class, ['record' => $record->getRouteKey()])
         ->fillForm([
-            'name'      => $newRecord->name,
+            'name' => $newRecord->name,
             'is_active' => $newRecord->is_active,
         ])
         ->assertActionExists('save')
@@ -94,8 +95,8 @@ it('can update an existing coating type', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('coating_types', [
-        'id'        => $record->id,
-        'name'      => $newRecord->name,
+        'id' => $record->id,
+        'name' => $newRecord->name,
         'is_active' => $newRecord->is_active,
     ]);
 });

@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
  */
 class CoatingTypeFactory extends Factory
 {
-
     protected $model = CoatingType::class;
 
     /**
@@ -25,7 +24,7 @@ class CoatingTypeFactory extends Factory
 
         return [
             'name' => $this->faker->word(),
-            'slug' =>Str::slug($name),
+            'slug' => Str::slug($name),
             'is_active' => $this->faker->boolean(),
         ];
     }

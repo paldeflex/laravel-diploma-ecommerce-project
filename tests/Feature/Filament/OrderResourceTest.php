@@ -10,6 +10,7 @@ use App\Models\User;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Facades\DB;
+
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
@@ -100,15 +101,13 @@ it('searches by order table columns', function (string $column) {
     livewire(ListOrders::class)
         ->searchTable($value)
         ->assertCanSeeTableRecords(
-            $orders->filter(fn ($order) =>
-            $column === 'user.name'
+            $orders->filter(fn ($order) => $column === 'user.name'
                 ? $order->user->name === $value
                 : toString($order->{$column}) === $value
             )
         )
         ->assertCanNotSeeTableRecords(
-            $orders->filter(fn ($order) =>
-            $column === 'user.name'
+            $orders->filter(fn ($order) => $column === 'user.name'
                 ? $order->user->name !== $value
                 : toString($order->{$column}) !== $value
             )
@@ -125,20 +124,20 @@ it('creates a new order', function () {
     $product = Product::factory()->create();
 
     $orderData = [
-        'user_id'         => $user->id,
-        'payment_method'  => 'yookassa',
-        'payment_status'  => 'pending',
+        'user_id' => $user->id,
+        'payment_method' => 'yookassa',
+        'payment_status' => 'pending',
         'shipping_method' => 'post_office',
-        'status'          => 'new',
+        'status' => 'new',
         'items' => [
             'item-1' => [
-                'product_id'   => $product->id,
-                'quantity'     => 2,
-                'unit_amount'  => $product->price,
+                'product_id' => $product->id,
+                'quantity' => 2,
+                'unit_amount' => $product->price,
                 'total_amount' => $product->price * 2,
             ],
         ],
-        'grand_total'     => $product->price * 2,
+        'grand_total' => $product->price * 2,
     ];
 
     livewire(CreateOrder::class)
@@ -149,32 +148,32 @@ it('creates a new order', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('orders', [
-        'user_id'         => $user->id,
-        'payment_method'  => 'yookassa',
-        'payment_status'  => 'pending',
+        'user_id' => $user->id,
+        'payment_method' => 'yookassa',
+        'payment_status' => 'pending',
         'shipping_method' => 'post_office',
-        'status'          => 'new',
-        'grand_total'     => $product->price * 2,
+        'status' => 'new',
+        'grand_total' => $product->price * 2,
     ]);
 });
 
 it('validates required fields when creating an order', function () {
     livewire(CreateOrder::class)
         ->fillForm([
-            'user_id'         => null,
-            'payment_method'  => null,
-            'payment_status'  => null,
+            'user_id' => null,
+            'payment_method' => null,
+            'payment_status' => null,
             'shipping_method' => null,
-            'status'          => null,
+            'status' => null,
         ])
         ->assertActionExists('create')
         ->call('create')
         ->assertHasFormErrors([
-            'user_id'         => ['required'],
-            'payment_method'  => ['required'],
-            'payment_status'  => ['required'],
+            'user_id' => ['required'],
+            'payment_method' => ['required'],
+            'payment_status' => ['required'],
             'shipping_method' => ['required'],
-            'status'          => ['required'],
+            'status' => ['required'],
         ]);
 });
 
@@ -196,7 +195,7 @@ it('updates an existing order', function () {
         ->assertHasNoFormErrors();
 
     $this->assertDatabaseHas('orders', [
-        'id'             => $order->id,
+        'id' => $order->id,
         'payment_status' => 'paid',
     ]);
 });
@@ -227,6 +226,7 @@ it('bulk deletes orders', function () {
     }
 });
 
-function toString(mixed $value): string {
-    return $value instanceof \BackedEnum ? $value->value : (string)$value;
+function toString(mixed $value): string
+{
+    return $value instanceof \BackedEnum ? $value->value : (string) $value;
 }

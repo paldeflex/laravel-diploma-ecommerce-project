@@ -6,7 +6,6 @@ use App\Filament\Resources\CategoryResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use App\Models\User;
 
 class EditCategory extends EditRecord
 {
@@ -30,6 +29,7 @@ class EditCategory extends EditRecord
                             ->title('Нельзя удалить категорию')
                             ->body("Количество продуктов в категории: {$count}. Сначала удалите или перенесите в другую категорию.")
                             ->send();
+
                         return false;
                     }
 

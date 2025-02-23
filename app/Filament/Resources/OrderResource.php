@@ -9,6 +9,7 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use App\Models\Product;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -28,7 +29,6 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Number;
-use Filament\Forms\Components\Hidden;
 
 class OrderResource extends Resource
 {
@@ -118,8 +118,8 @@ class OrderResource extends Resource
                                     ->default(1)
                                     ->minValue(1)
                                     ->live(onBlur: true)
-                                    ->disabled(fn(Get $get) => empty($get('product_id')))
-                                    ->afterStateUpdated(fn($state, Set $set, Get $get) => $set('total_amount', \round($state * $get('unit_amount'), 2)))
+                                    ->disabled(fn (Get $get) => empty($get('product_id')))
+                                    ->afterStateUpdated(fn ($state, Set $set, Get $get) => $set('total_amount', \round($state * $get('unit_amount'), 2)))
                                     ->columnSpan(2),
                                 TextInput::make('unit_amount')
                                     ->label('Цена за единицу')
@@ -139,7 +139,7 @@ class OrderResource extends Resource
                             ->default(0)
                             ->content(function (Get $get, Set $set) {
                                 $total = 0;
-                                if (!$repeaters = $get('items')) {
+                                if (! $repeaters = $get('items')) {
                                     return $total;
                                 }
 
@@ -147,14 +147,15 @@ class OrderResource extends Resource
                                     $total += $get("items.{$key}.total_amount");
                                 }
                                 $set('grand_total', $total);
+
                                 return Number::currency($total, 'RUB', 'ru_RU');
                             }),
 
                         Hidden::make('grand_total')
-                            ->default(0)
+                            ->default(0),
 
-                    ])
-                ])->columnSpanFull()
+                    ]),
+                ])->columnSpanFull(),
             ]);
     }
 
@@ -175,15 +176,15 @@ class OrderResource extends Resource
                 TextColumn::make('payment_method')
                     ->label('Тип оплаты')
                     ->searchable()
-                ->sortable(),
+                    ->sortable(),
                 TextColumn::make('payment_status')
                     ->label('Статус оплаты')
                     ->sortable(),
                 SelectColumn::make('status')
                     ->label('Статус товара')
                     ->options(OrderStatus::class)
-                ->searchable()
-                ->sortable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('shipping_method')
                     ->label('Способ доставки')
                     ->sortable()
@@ -191,8 +192,8 @@ class OrderResource extends Resource
                 TextColumn::make('created_at')
                     ->label('Добавлено')
                     ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Изменено')
                     ->dateTime()

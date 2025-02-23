@@ -129,11 +129,12 @@ class CategoryResource extends Resource
                                         ->title('Нельзя удалить категорию')
                                         ->body("Количество продуктов в категории: {$count}. Сначала удалите или перенесите в другую категорию.")
                                         ->send();
+
                                     return false;
                                 }
 
                                 $record->delete();
-                            })
+                            }),
                     ]
                 ),
             ])
@@ -153,6 +154,7 @@ class CategoryResource extends Resource
                                     ->title('Нельзя удалить некоторые категории')
                                     ->body("Количество категорий в которых есть продукты: {$count}. Удаление невозможно.")
                                     ->send();
+
                                 return false;
                             }
 
