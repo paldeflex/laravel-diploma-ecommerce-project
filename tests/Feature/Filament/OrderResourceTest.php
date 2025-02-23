@@ -71,9 +71,15 @@ it('sorts order table columns', function (string $column) {
 
     livewire(ListOrders::class)
         ->sortTable($column)
-        ->assertCanSeeTableRecords($orders->sortBy($column), inOrder: true)
+        ->assertCanSeeTableRecords(
+            $orders->sortBy(fn ($order) => toString($order->{$column})),
+            inOrder: true
+        )
         ->sortTable($column, 'desc')
-        ->assertCanSeeTableRecords($orders->sortByDesc($column), inOrder: true);
+        ->assertCanSeeTableRecords(
+            $orders->sortByDesc(fn ($order) => toString($order->{$column})),
+            inOrder: true
+        );
 })->with([
     'grand_total',
     'payment_method',
@@ -89,20 +95,24 @@ it('searches by order table columns', function (string $column) {
 
     $value = $column === 'user.name'
         ? $orders->first()->user->name
-        : $orders->first()->{$column};
+        : toString($orders->first()->{$column});
 
     livewire(ListOrders::class)
         ->searchTable($value)
-        ->assertCanSeeTableRecords($orders->filter(function ($order) use ($column, $value) {
-            return $column === 'user.name'
+        ->assertCanSeeTableRecords(
+            $orders->filter(fn ($order) =>
+            $column === 'user.name'
                 ? $order->user->name === $value
-                : $order->{$column} === $value;
-        }))
-        ->assertCanNotSeeTableRecords($orders->filter(function ($order) use ($column, $value) {
-            return $column === 'user.name'
+                : toString($order->{$column}) === $value
+            )
+        )
+        ->assertCanNotSeeTableRecords(
+            $orders->filter(fn ($order) =>
+            $column === 'user.name'
                 ? $order->user->name !== $value
-                : $order->{$column} !== $value;
-        }));
+                : toString($order->{$column}) !== $value
+            )
+        );
 })->with([
     'user.name',
     'grand_total',
@@ -216,3 +226,7 @@ it('bulk deletes orders', function () {
         $this->assertModelMissing($order);
     }
 });
+
+function toString(mixed $value): string {
+    return $value instanceof \BackedEnum ? $value->value : (string)$value;
+}

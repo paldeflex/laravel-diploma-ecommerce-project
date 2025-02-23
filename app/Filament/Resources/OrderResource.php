@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\OrderStatus;
+use App\Enums\PaymentMethod;
+use App\Enums\ShippingMethod;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use App\Models\Product;
@@ -55,30 +58,18 @@ class OrderResource extends Resource
                                 ->columnSpan(3),
                             Select::make('payment_method')
                                 ->label('Тип оплаты')
-                                ->options([
-                                    'yookassa' => 'ЮKassa',
-                                    'cod' => 'Наложенные платеж',
-                                ])
+                                ->options(PaymentMethod::class)
                                 ->required()
                                 ->columnSpan(3),
                             Select::make('shipping_method')
                                 ->label('Способ доставки')
-                                ->options([
-                                    'post_office' => 'Почта России',
-                                    'sdek' => 'СДЭК',
-                                    'boxberry' => 'Boxberry',
-                                    'yandex_market' => 'Яндекс.Маркет',
-                                ])
+                                ->options(ShippingMethod::class)
                                 ->default('pending')
                                 ->required()
                                 ->columnSpan(3),
                             Select::make('payment_status')
                                 ->label('Статус оплаты')
-                                ->options([
-                                    'pending' => 'В ожидании',
-                                    'paid' => 'Оплачено',
-                                    'failed' => 'Не удалось',
-                                ])
+                                ->options(PaymentMethod::class)
                                 ->default('pending')
                                 ->required()
                                 ->columnSpan(3),
@@ -86,29 +77,9 @@ class OrderResource extends Resource
                         ToggleButtons::make('status')
                             ->label('Статус товара')
                             ->inline()
-                            ->default('Новый')
+                            ->default(OrderStatus::NEW->value)
                             ->required()
-                            ->options([
-                                'new' => 'Новый',
-                                'processing' => 'Обработка',
-                                'shipped' => 'Отправлено',
-                                'delivered' => 'Доставлено',
-                                'canceled' => 'Отменено'
-                            ])
-                            ->colors([
-                                'new' => 'info',
-                                'processing' => 'warning',
-                                'shipped' => 'success',
-                                'delivered' => 'success',
-                                'canceled' => 'danger'
-                            ])
-                            ->icons([
-                                'new' => 'heroicon-m-sparkles',
-                                'processing' => 'heroicon-m-arrow-path',
-                                'shipped' => 'heroicon-m-truck',
-                                'delivered' => 'heroicon-m-check-badge',
-                                'canceled' => 'heroicon-m-x-circle'
-                            ])
+                            ->options(OrderStatus::class)
                             ->columnSpanFull(),
                     ]),
                     Section::make('Заказанные товары')->schema([
@@ -185,7 +156,6 @@ class OrderResource extends Resource
                     ])
                 ])->columnSpanFull()
             ]);
-
     }
 
     public static function table(Table $table): Table
@@ -211,13 +181,7 @@ class OrderResource extends Resource
                     ->sortable(),
                 SelectColumn::make('status')
                     ->label('Статус товара')
-                    ->options([
-                    'new' => 'Новый',
-                    'processing' => 'Обработка',
-                    'shipped' => 'Отправлено',
-                    'delivered' => 'Доставлено',
-                    'canceled' => 'Отменено'
-                ])
+                    ->options(OrderStatus::class)
                 ->searchable()
                 ->sortable(),
                 TextColumn::make('shipping_method')
@@ -225,10 +189,12 @@ class OrderResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Добавлено')
                     ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Изменено')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
