@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -18,6 +19,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
 class CoatingTypeResource extends Resource
@@ -87,23 +89,62 @@ class CoatingTypeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // ...
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make(
-                    [
-                        ViewAction::make(),
-                        EditAction::make(),
-                        DeleteAction::make(),
-                    ]
-                ),
+                Tables\Actions\ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make()
+                        ->action(function ($record) {
+                            $count = $record->products()->count();
+
+                            if ($count > 0) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title('Нельзя удалить тип покрытия')
+                                    ->body("В данном типе покрытия привязан(ы) {$count} товар(ов). Сначала удалите или перенесите их.")
+                                    ->send();
+
+                                return false;
+                            }
+
+                            $record->delete();
+                        }),
+                ]),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->action(function (Collection $records) {
+                            $recordsWithProducts = $records->filter(fn ($record) => $record->products()->count() > 0);
+
+                            if ($recordsWithProducts->isNotEmpty()) {
+                                $count = $recordsWithProducts->count();
+
+                                Notification::make()
+                                    ->danger()
+                                    ->title('Нельзя удалить некоторые типы покрытий')
+                                    ->body("Удаление невозможно. Количество типов с привязанными товарами: {$count}.")
+                                    ->send();
+
+                                return false;
+                            }
+
+                            $records->each->delete();
+
+                            Notification::make()
+                                ->success()
+                                ->title('Успешно')
+                                ->body('Все выбранные типы покрытий удалены.')
+                                ->send();
+
+                            return true;
+                        }),
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {
