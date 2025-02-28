@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\OrderResource\RelationManagers;
 
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -15,12 +14,11 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AddressRelationManager extends RelationManager
 {
     protected static string $relationship = 'address';
+
     protected static ?string $title = 'Адреса доставки';
 
     public function form(Form $form): Form
@@ -59,7 +57,7 @@ class AddressRelationManager extends RelationManager
                             ->label('Улица, дом, квартира')
                             ->required()
                             ->maxLength(255),
-                    ])
+                    ]),
             ]);
     }
 

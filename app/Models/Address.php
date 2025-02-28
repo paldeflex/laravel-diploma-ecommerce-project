@@ -37,7 +37,7 @@ class Address extends Model
     protected static function booted(): void
     {
         static::creating(static function ($address) {
-            if (!$address->user_id && $address->order) {
+            if (! $address->user_id && $address->order) {
                 $address->user_id = $address->order->user_id;
             }
         });
