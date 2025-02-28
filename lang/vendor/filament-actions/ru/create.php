@@ -8,7 +8,7 @@ return [
 
         'modal' => [
 
-            'heading' => 'Добавить :label',
+            'heading' => 'Добавление',
 
             'actions' => [
 
@@ -17,7 +17,7 @@ return [
                 ],
 
                 'create_another' => [
-                    'label' => 'Сохранить и добавить',
+                    'label' => 'Сохранить и добавить ещё',
                 ],
 
             ],

@@ -105,7 +105,7 @@ return [
 
         'heading' => 'Записи не найдены',
 
-        'description' => 'Добавить :model для старта.',
+        'description' => '',
 
     ],
 

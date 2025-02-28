@@ -9,6 +9,7 @@ class Address extends Model
 {
     protected $fillable = [
         'user_id',
+        'order_id',
         'first_name',
         'last_name',
         'phone',
@@ -25,11 +26,20 @@ class Address extends Model
 
     public function getFullNameAttribute(): string
     {
-        return `$this->first_name $this->last_name`;
+        return "$this->first_name $this->last_name";
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(static function ($address) {
+            if (!$address->user_id && $address->order) {
+                $address->user_id = $address->order->user_id;
+            }
+        });
     }
 }

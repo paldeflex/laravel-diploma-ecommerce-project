@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Enums\OrderStatus;
 use App\Enums\PaymentMethod;
+use App\Enums\PaymentStatus;
 use App\Enums\ShippingMethod;
 use App\Filament\Resources\OrderResource\Pages;
+use App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager;
 use App\Models\Order;
 use App\Models\Product;
 use Filament\Forms\Components\Group;
@@ -40,7 +42,7 @@ class OrderResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Заказы';
 
-    protected static ?string $modelLabel = 'Заказ';
+    protected static ?string $modelLabel = 'заказа';
 
     public static function form(Form $form): Form
     {
@@ -69,7 +71,7 @@ class OrderResource extends Resource
                                 ->columnSpan(3),
                             Select::make('payment_status')
                                 ->label('Статус оплаты')
-                                ->options(PaymentMethod::class)
+                                ->options(PaymentStatus::class)
                                 ->default('pending')
                                 ->required()
                                 ->columnSpan(3),
@@ -222,7 +224,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressRelationManager::class
         ];
     }
 
