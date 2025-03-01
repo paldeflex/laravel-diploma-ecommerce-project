@@ -31,7 +31,7 @@ enum OrderStatus: string implements HasColor, HasIcon, HasLabel
             self::NEW => 'info',
             self::PROCESSING => 'warning',
             self::SHIPPED => 'success',
-            self::DELIVERED => 'success',
+            self::DELIVERED => 'delivered',
             self::CANCELED => 'danger',
         };
     }

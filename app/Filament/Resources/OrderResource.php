@@ -230,12 +230,22 @@ class OrderResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        $count = static::getModel()::whereIn('status', [
+            OrderStatus::NEW->value,
+            OrderStatus::PROCESSING->value,
+        ])->count();
+
+        return (string) $count;
     }
 
     public static function getNavigationBadgeColor(): ?string
     {
-        return static::getModel()::count() > 10 ? 'danger' : 'success';
+        $count = static::getModel()::whereIn('status', [
+            OrderStatus::NEW->value,
+            OrderStatus::PROCESSING->value,
+        ])->count();
+
+        return $count > 10 ? 'danger' : 'success';
     }
 
     public static function getPages(): array

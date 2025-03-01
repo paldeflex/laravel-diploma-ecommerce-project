@@ -1,5 +1,9 @@
 <?php
 
+use App\Enums\OrderStatus;
+use App\Enums\PaymentMethod;
+use App\Enums\PaymentStatus;
+use App\Enums\ShippingMethod;
 use App\Filament\Resources\OrderResource\Pages\CreateOrder;
 use App\Filament\Resources\OrderResource\Pages\EditOrder;
 use App\Filament\Resources\OrderResource\Pages\ListOrders;
@@ -119,10 +123,10 @@ it('creates a new order', function () {
 
     $orderData = [
         'user_id' => $user->id,
-        'payment_method' => 'yookassa',
-        'payment_status' => 'pending',
-        'shipping_method' => 'post_office',
-        'status' => 'new',
+        'payment_method' => PaymentMethod::YOOKASSA->value,
+        'payment_status' => PaymentStatus::PENDING->value,
+        'shipping_method' => ShippingMethod::POST_OFFICE->value,
+        'status' => OrderStatus::NEW->value,
         'items' => [
             'item-1' => [
                 'product_id' => $product->id,
@@ -135,7 +139,7 @@ it('creates a new order', function () {
     ];
 
     livewire(CreateOrder::class)
-        ->set('data.items', null)
+        ->set('data.items')
         ->fillForm($orderData)
         ->assertActionExists('create')
         ->call('create')
@@ -143,10 +147,10 @@ it('creates a new order', function () {
 
     $this->assertDatabaseHas('orders', [
         'user_id' => $user->id,
-        'payment_method' => 'yookassa',
-        'payment_status' => 'pending',
-        'shipping_method' => 'post_office',
-        'status' => 'new',
+        'payment_method' => PaymentMethod::YOOKASSA->value,
+        'payment_status' => PaymentStatus::PENDING->value,
+        'shipping_method' => ShippingMethod::POST_OFFICE->value,
+        'status' => OrderStatus::NEW->value,
         'grand_total' => $product->price * 2,
     ]);
 });
@@ -175,11 +179,11 @@ it('updates an existing order', function () {
     $order = Order::factory()
         ->has(OrderItem::factory()->count(2), 'items')
         ->create([
-            'payment_status' => 'pending',
+            'payment_status' => PaymentStatus::PENDING->value,
         ]);
 
     $newData = [
-        'payment_status' => 'paid',
+        'payment_status' => PaymentStatus::PAID->value,
     ];
 
     livewire(EditOrder::class, ['record' => $order->getRouteKey()])
@@ -190,7 +194,7 @@ it('updates an existing order', function () {
 
     $this->assertDatabaseHas('orders', [
         'id' => $order->id,
-        'payment_status' => 'paid',
+        'payment_status' => PaymentStatus::PAID->value,
     ]);
 });
 
