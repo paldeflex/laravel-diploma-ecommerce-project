@@ -9,14 +9,8 @@ use App\Models\Product;
 use App\Models\User;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Support\Facades\DB;
 
 use function Pest\Livewire\livewire;
-
-beforeEach(function () {
-    DB::table('orders')->truncate();
-    DB::table('order_items')->truncate();
-});
 
 it('displays the order list page', function () {
     livewire(ListOrders::class)

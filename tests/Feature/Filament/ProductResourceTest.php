@@ -8,14 +8,9 @@ use App\Models\CoatingType;
 use App\Models\Product;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use function Pest\Livewire\livewire;
-
-beforeEach(function () {
-    DB::table('products')->truncate();
-});
 
 it('can display the product list page', function () {
     livewire(ListProducts::class)

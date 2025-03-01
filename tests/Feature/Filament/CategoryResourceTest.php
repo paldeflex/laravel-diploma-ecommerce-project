@@ -6,14 +6,9 @@ use App\Filament\Resources\CategoryResource\Pages\ListCategories;
 use App\Models\Category;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use function Pest\Livewire\livewire;
-
-beforeEach(function () {
-    DB::table('categories')->truncate();
-});
 
 it('can display the category list page', function () {
     livewire(ListCategories::class)

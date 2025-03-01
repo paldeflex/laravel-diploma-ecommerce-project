@@ -5,14 +5,8 @@ use App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 use function Pest\Livewire\livewire;
-
-beforeEach(function () {
-    DB::table('orders')->truncate();
-    DB::table('addresses')->truncate();
-});
 
 it('address belongs to the same user as the order', function () {
     $user = User::factory()->create();

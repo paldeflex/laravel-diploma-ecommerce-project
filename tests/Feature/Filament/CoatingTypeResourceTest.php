@@ -6,14 +6,9 @@ use App\Filament\Resources\CoatingTypeResource\Pages\ListCoatingTypes;
 use App\Models\CoatingType;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use function Pest\Livewire\livewire;
-
-beforeEach(function () {
-    DB::table('coating_types')->truncate();
-});
 
 it('can display the coating type list page', function () {
     livewire(ListCoatingTypes::class)
