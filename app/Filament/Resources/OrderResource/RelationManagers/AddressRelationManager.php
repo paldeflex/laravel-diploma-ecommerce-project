@@ -19,7 +19,7 @@ class AddressRelationManager extends RelationManager
 {
     protected static string $relationship = 'address';
 
-    protected static ?string $title = 'Адреса доставки';
+    protected static ?string $title = 'Адрес доставки';
 
     public function form(Form $form): Form
     {

@@ -44,6 +44,8 @@ class OrderResource extends Resource
 
     protected static ?string $modelLabel = 'заказа';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -77,7 +79,7 @@ class OrderResource extends Resource
                                 ->columnSpan(3),
                         ])->columns(6),
                         ToggleButtons::make('status')
-                            ->label('Статус товара')
+                            ->label('Статус заказа')
                             ->inline()
                             ->default(OrderStatus::NEW->value)
                             ->required()
@@ -183,7 +185,7 @@ class OrderResource extends Resource
                     ->label('Статус оплаты')
                     ->sortable(),
                 SelectColumn::make('status')
-                    ->label('Статус товара')
+                    ->label('Статус заказа')
                     ->options(OrderStatus::class)
                     ->searchable()
                     ->sortable(),

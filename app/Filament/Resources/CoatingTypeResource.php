@@ -30,9 +30,13 @@ class CoatingTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-paint-brush';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $pluralModelLabel = 'Типы покрытий';
 
     protected static ?string $modelLabel = 'Тип покрытия';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

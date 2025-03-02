@@ -20,7 +20,7 @@ class AddressFactory extends Factory
             'street_address' => $this->faker->streetAddress(),
             'city' => $this->faker->city(),
             'region' => $this->faker->state(),
-            'zip_code' => $this->faker->postcode(),
+            'zip_code' => $this->faker->numberBetween(100000, 999999),
         ];
     }
 }

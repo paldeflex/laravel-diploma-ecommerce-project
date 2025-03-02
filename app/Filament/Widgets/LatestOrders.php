@@ -1,31 +1,33 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\RelationManagers;
+namespace App\Filament\Widgets;
 
 use App\Filament\Resources\OrderResource;
 use App\Models\Order;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Widgets\TableWidget as BaseWidget;
 
-class OrdersRelationManager extends RelationManager
+class LatestOrders extends BaseWidget
 {
-    protected static string $relationship = 'orders';
+    protected int|string|array $columnSpan = 'full';
 
-    protected static ?string $title = 'Заказы';
+    protected static ?int $sort = 2;
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->query(OrderResource::getEloquentQuery())
+            ->heading('Последние заказы')
+            ->defaultPaginationPageOption(5)
+            ->defaultSort('created_at', 'DESC')
             ->columns([
                 TextColumn::make('id')
                     ->label('Номер заказа')
+                    ->searchable(),
+                TextColumn::make('user.name')
+                    ->label('Имя покупателя')
                     ->searchable(),
                 TextColumn::make('grand_total')
                     ->label('Сумма заказа')
@@ -48,28 +50,12 @@ class OrdersRelationManager extends RelationManager
                     ->label('Дата заказа')
                     ->dateTime(),
             ])
-            ->filters([
-                //
-            ])
-            ->headerActions([
-            ])
             ->actions([
-
-                ActionGroup::make(
-                    [
-                        Action::make('view_order')
-                            ->label('Посмотреть заказ')
-                            ->url(fn (Order $record): string => OrderResource::getUrl('view', ['record' => $record->id]))
-                            ->color('info')
-                            ->icon('heroicon-o-eye'),
-                        DeleteAction::make(),
-                    ]
-                ),
-            ])
-            ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                Action::make('view_order')
+                    ->label('Посмотреть заказ')
+                    ->url(fn (Order $record): string => OrderResource::getUrl('view', ['record' => $record->id]))
+                    ->color('info')
+                    ->icon('heroicon-o-eye'),
             ]);
     }
 }
