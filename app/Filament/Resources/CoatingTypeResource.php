@@ -57,6 +57,9 @@ class CoatingTypeResource extends Resource
                                 ->dehydrated()
                                 ->maxLength(255)
                                 ->unique(CoatingType::class, 'slug', ignoreRecord: true),
+                            TextInput::make('description')
+                                ->label('Описание')
+                                ->maxLength(255)
                         ]),
                     Toggle::make('is_active')
                         ->label('Опубликовать')
@@ -75,6 +78,10 @@ class CoatingTypeResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Человекопонятный URL')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Описание')
+                    ->words(5)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_active')
                     ->label('Опубликована')

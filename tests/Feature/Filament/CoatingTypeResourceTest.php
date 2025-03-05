@@ -35,7 +35,7 @@ it('displays the required columns in the table', function (string $column) {
 it('can render table columns', function (string $column) {
     livewire(ListCoatingTypes::class)
         ->assertCanRenderTableColumn($column);
-})->with(['name', 'slug', 'is_active', 'created_at', 'updated_at']);
+})->with(['name', 'slug', 'is_active', 'description', 'created_at', 'updated_at']);
 
 it('can sort table columns', function (string $column) {
     $records = CoatingType::factory(5)->create();
@@ -47,14 +47,16 @@ it('can sort table columns', function (string $column) {
         ->assertCanSeeTableRecords($records->sortByDesc($column), inOrder: true);
 })->with(['name']);
 
-it('can search by table columns', function (string $column) {
-    $records = CoatingType::factory(5)->create();
-    $value = $records->first()->{$column};
+it('can search by name and slug', function (string $column) {
+    $uniqueValue = 'unique-' . str()->random(8);
+    $matchingRecord = CoatingType::factory()->create([$column => $uniqueValue]);
+
+    CoatingType::factory(4)->create();
 
     livewire(ListCoatingTypes::class)
-        ->searchTable($value)
-        ->assertCanSeeTableRecords($records->where($column, $value))
-        ->assertCanNotSeeTableRecords($records->where($column, '!=', $value));
+        ->searchTable($uniqueValue)
+        ->assertCountTableRecords(1)
+        ->assertCanSeeTableRecords(collect([$matchingRecord]));
 })->with(['name', 'slug']);
 
 it('can create a new coating type', function () {

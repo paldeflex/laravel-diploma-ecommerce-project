@@ -23,7 +23,8 @@ class CoatingTypeFactory extends Factory
         $name = $this->faker->unique()->word();
 
         return [
-            'name' => $this->faker->word(),
+            'name' => $name,
+            'description' => $this->faker->sentence(),
             'slug' => Str::slug($name),
             'is_active' => $this->faker->boolean(),
         ];
