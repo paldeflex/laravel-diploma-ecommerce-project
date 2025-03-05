@@ -12,9 +12,11 @@ class CategoryFactory extends Factory
 
     public function definition(): array
     {
+        $name = $this->faker->unique()->word();
+
         return [
-            'name' => $this->faker->word(),
-            'slug' => Str::slug($this->faker->unique()->words(2, true)),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'image' => null,
             'is_active' => $this->faker->boolean(),
         ];
