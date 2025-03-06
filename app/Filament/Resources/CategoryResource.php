@@ -89,6 +89,7 @@ class CategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('updated_at', 'desc')
             ->columns([
                 TextColumn::make('name')
                     ->label('Название')
