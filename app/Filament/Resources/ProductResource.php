@@ -49,22 +49,26 @@ class ProductResource extends Resource
                         TextInput::make('name')
                             ->label('Название')
                             ->required()
+                            ->placeholder('Введите название продукции')
                             ->maxLength(255)
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                         TextInput::make('slug')
                             ->label('Человекопонятный URL')
+                            ->placeholder('Вводить ничего не нужно, сгенерируется сам')
                             ->maxLength(255)
                             ->readOnly()
                             ->unique(Product::class, 'slug', ignoreRecord: true),
                         TextInput::make('price')
                             ->label('Стоимость')
                             ->numeric()
+                            ->placeholder('Введите стоимость продукции')
                             ->required()
                             ->prefix('₽')->columnSpanFull(),
                         MarkdownEditor::make('description')
                             ->label('Описание')
                             ->columnSpanFull()
+                            ->placeholder('Введите описание продукции')
                             ->fileAttachmentsDirectory('products'),
                     ])->columns(),
 

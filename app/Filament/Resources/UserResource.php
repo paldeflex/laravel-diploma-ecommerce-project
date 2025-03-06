@@ -44,10 +44,12 @@ class UserResource extends Resource
                     ->schema([
                         TextInput::make('name')
                             ->label('Имя')
+                            ->placeholder('Введите имя пользователя')
                             ->required()
                             ->maxLength(255),
                         TextInput::make('email')
                             ->label('Электронная почта')
+                            ->placeholder('Введите email')
                             ->email()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true)
@@ -57,6 +59,7 @@ class UserResource extends Resource
                             ->default(now()),
                         TextInput::make('password')
                             ->label('Пароль')
+                            ->placeholder('Введите пароль')
                             ->password()
                             ->minLength(6)
                             ->dehydrated(fn ($state) => filled($state))
@@ -72,11 +75,13 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Имя')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Не указано'),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Электронная почта')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Не указано'),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->label('Дата подтверждения эл. почты')
                     ->dateTime()
@@ -85,11 +90,13 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата создания')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Не указано'),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Дата обновления')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Не указано'),
             ])
             ->filters([
                 //

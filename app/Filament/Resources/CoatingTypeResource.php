@@ -48,17 +48,20 @@ class CoatingTypeResource extends Resource
                             TextInput::make('name')
                                 ->label('Название')
                                 ->required()
+                                ->placeholder('Введите название типа покрытия')
                                 ->maxLength(255)
                                 ->live(onBlur: true)
                                 ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')
+                                ->placeholder('Вводить ничего не нужно, сгенерируется сам')
                                 ->readOnly()
                                 ->dehydrated()
                                 ->maxLength(255)
                                 ->unique(CoatingType::class, 'slug', ignoreRecord: true),
                             TextInput::make('description')
                                 ->label('Описание')
+                                ->placeholder('Введите описание продукта')
                                 ->maxLength(255)
                         ]),
                     Toggle::make('is_active')
@@ -74,27 +77,33 @@ class CoatingTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Название')
+                    ->placeholder('Не указано')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Человекопонятный URL')
+                    ->placeholder('Не указано')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Описание')
+                    ->placeholder('Не указано')
                     ->words(5)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_active')
                     ->label('Опубликована')
+                    ->placeholder('Не указано')
                     ->badge()
                     ->formatStateUsing(fn ($state) => $state ? 'Да' : 'Нет')
                     ->color(fn ($state) => $state ? 'success' : 'danger'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Добавлено')
+                    ->placeholder('Не указано')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Изменено')
+                    ->placeholder('Не указано')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

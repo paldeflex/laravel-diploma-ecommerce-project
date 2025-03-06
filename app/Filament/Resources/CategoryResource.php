@@ -50,6 +50,7 @@ class CategoryResource extends Resource
                             TextInput::make('name')
                                 ->label('Название')
                                 ->required()
+                                ->placeholder('Введите название продукта')
                                 ->maxLength(255)
                                 ->live(onBlur: true)
                                 ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
@@ -61,6 +62,7 @@ class CategoryResource extends Resource
                             TextInput::make('slug')
                                 ->label('Человекопонятный URL')
                                 ->readOnly()
+                                ->placeholder('Вводить ничего не нужно, сгенерируется сам')
                                 ->dehydrated()
                                 ->maxLength(255)
                                 ->unique(Category::class, 'slug', ignoreRecord: true),
@@ -90,25 +92,30 @@ class CategoryResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Название')
+                    ->placeholder('Не указано')
                     ->sortable()
                     ->searchable(),
                 ImageColumn::make('image_url')
-                    ->label('Изображение'),
+                    ->label('Изображение')
+                    ->placeholder('Нет изображения'),
                 TextColumn::make('slug')
                     ->label('Человекопонятный URL')
                     ->searchable(),
                 TextColumn::make('is_active')
                     ->label('Опубликована')
+                    ->placeholder('Не указано')
                     ->badge()
                     ->formatStateUsing(fn ($state) => $state ? 'Да' : 'Нет')
                     ->color(fn ($state) => $state ? 'success' : 'danger'),
                 TextColumn::make('created_at')
                     ->label('Добавлено')
+                    ->placeholder('Не указано')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Изменено')
+                    ->placeholder('Не указано')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
