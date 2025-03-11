@@ -186,12 +186,10 @@ class OrderResource extends Resource
                     ->numeric()
                     ->placeholder('Не указано')
                     ->sortable()
-                    ->searchable()
                     ->money('RUB'),
                 TextColumn::make('payment_method')
                     ->label('Тип оплаты')
                     ->placeholder('Не указано')
-                    ->searchable()
                     ->sortable(),
                 TextColumn::make('payment_status')
                     ->label('Статус оплаты')

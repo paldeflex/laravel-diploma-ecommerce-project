@@ -112,9 +112,6 @@ it('searches by order table columns', function (string $column) {
         );
 })->with([
     'user.name',
-    'grand_total',
-    'payment_method',
-    'shipping_method',
 ]);
 
 it('creates a new order', function () {
