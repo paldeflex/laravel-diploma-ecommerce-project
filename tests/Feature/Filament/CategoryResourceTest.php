@@ -3,10 +3,7 @@
 use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use App\Filament\Resources\CategoryResource\Pages\EditCategory;
 use App\Filament\Resources\CategoryResource\Pages\ListCategories;
-use App\Filament\Resources\CoatingTypeResource\Pages\ListCoatingTypes;
 use App\Models\Category;
-use App\Models\CoatingType;
-use App\Models\User;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Support\Str;
@@ -59,7 +56,6 @@ it('can search by name and slug', function (string $column) {
         ->assertCanSeeTableRecords($records->where($column, $value))
         ->assertCanNotSeeTableRecords($records->where($column, '!=', $value));
 })->with(['name', 'slug']);
-
 
 it('can create a new category', function () {
     $record = Category::factory()->make();

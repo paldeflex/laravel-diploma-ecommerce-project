@@ -62,7 +62,7 @@ class CoatingTypeResource extends Resource
                             TextInput::make('description')
                                 ->label('Описание')
                                 ->placeholder('Введите описание продукта')
-                                ->maxLength(255)
+                                ->maxLength(255),
                         ]),
                     Toggle::make('is_active')
                         ->label('Опубликовать')

@@ -7,13 +7,21 @@ use Illuminate\View\Component;
 class Logo extends Component
 {
     public string $href;
+
     public string $iconColor;
+
     public string $textColor;
+
     public int $iconSize;
+
     public string $titleSize;
+
     public string $subtitleSize;
+
     public string $title;
+
     public string $subtitle;
+
     public string $icon;
 
     public function __construct(

@@ -48,7 +48,7 @@ it('can sort table columns', function (string $column) {
 })->with(['name']);
 
 it('can search by name and slug', function (string $column) {
-    $uniqueValue = 'unique-' . str()->random(8);
+    $uniqueValue = 'unique-'.str()->random(8);
     $matchingRecord = CoatingType::factory()->create([$column => $uniqueValue]);
 
     CoatingType::factory(4)->create();
