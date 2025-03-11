@@ -8,10 +8,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="bg-slate-200 dark:bg-slate-700">
-    <main>
-        {{ $slot }}
-    </main>
-    @livewireScripts
+
+    <body class="flex flex-col min-h-screen">
+        @livewire('partials.navbar')
+            <main>
+                {{ $slot }}
+            </main>
+        @livewire('partials.footer')
+        @livewireScripts
+        @vite('resources/js/custom.js')
     </body>
 </html>
