@@ -118,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-3 lg:w-3/4">
+                <div class="w-full sm:px-3 lg:w-3/4">
                     <div class="px-3 mb-4">
                         <div class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex dark:bg-gray-900 ">
                             <div class="flex items-center justify-between">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center ">
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="/products/product_one" class="">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="#" class="">
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="#" class="">
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="#" class="">
@@ -242,7 +242,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="#" class="">
@@ -270,7 +270,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full px-3 mb-6 sm:w-1/2 md:w-1/3">
+                        <div class="w-full sm:px-3 mb-6 sm:w-1/2 md:w-1/3">
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a href="#" class="">
@@ -301,7 +301,7 @@
 
                     </div>
                     <div class="flex justify-end mt-6">
-                        <nav aria-label="page-navigation">
+                        <nav aria-label="page-navigation" >
                             <ul class="flex list-style-none">
                                 <li class="page-item disabled ">
                                     <a href="#" class="relative block pointer-events-none px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300  rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-600"><span class="hidden sm:inline-block">Предыдущая</span>
