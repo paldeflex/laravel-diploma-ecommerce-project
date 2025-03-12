@@ -1,7 +1,6 @@
 <div>
     <div
-        class="flex h-screen justify-center items-center w-full bg-gradient-to-r from-blue-200 to-cyan-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto"
-        id="main-content">
+        class="flex h-screen justify-center items-center w-full bg-gradient-to-r from-blue-200 to-cyan-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
         <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
                 <div>
@@ -26,9 +25,9 @@
                     </div>
                 </div>
                 <div class="relative ms-4">
+
                     <img class="w-full max-w-md mx-auto rounded-md"
                          src="{{ Vite::asset('resources/images/hero-image.webp') }}" alt="Image Description">
-
                     <div
                         class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0"></div>
                 </div>
@@ -268,7 +267,7 @@
                     <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                         <div class="flex items-center px-6 mb-2 md:mb-0">
                             <div class="flex mr-2 rounded-full">
-                                <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt="" class="object-cover w-12 h-12 rounded-full">
+                                <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt="" class="object-cover w-12 h-12 rounded-full hidden sm:inline-block">
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">Александр Громов</h2>
@@ -292,7 +291,7 @@
                     <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                         <div class="flex items-center px-6 mb-2 md:mb-0">
                             <div class="flex mr-2 rounded-full">
-                                <img src="https://i.postimg.cc/q7pv50zT/pexels-edmond-dant-s-4342352.jpg" alt="" class="object-cover w-12 h-12 rounded-full">
+                                <img src="https://i.postimg.cc/q7pv50zT/pexels-edmond-dant-s-4342352.jpg" alt="" class="object-cover w-12 h-12 rounded-full hidden sm:inline-block">
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">Ирина Васильева</h2>
@@ -314,7 +313,7 @@
                     <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                         <div class="flex items-center px-6 mb-2 md:mb-0">
                             <div class="flex mr-2 rounded-full">
-                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full">
+                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full hidden sm:inline-block">
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">Виталий Кудряшов</h2>
@@ -336,7 +335,7 @@
                     <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                         <div class="flex items-center px-6 mb-2 md:mb-0">
                             <div class="flex mr-2 rounded-full">
-                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full">
+                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full hidden sm:inline-block">
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">Сергей Лебедев</h2>
@@ -358,7 +357,7 @@
                     <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                         <div class="flex items-center px-6 mb-2 md:mb-0">
                             <div class="flex mr-2 rounded-full">
-                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full">
+                                <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt="" class="object-cover w-12 h-12 rounded-full hidden sm:inline-block">
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">Марина Коваленко</h2>
