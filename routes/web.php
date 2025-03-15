@@ -32,5 +32,3 @@ Route::get('/reset', ResetPasswordPage::class)->name('reset');
 
 Route::get('/success', SuccessPage::class)->name('success');
 Route::get('/cancel', CancelPage::class)->name('cancel');
-
-

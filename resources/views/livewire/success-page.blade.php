@@ -11,7 +11,7 @@
                             <div class="flex flex-col items-start justify-start space-y-2">
                                 <p class="text-lg font-semibold leading-4 text-left text-gray-800 dark:text-gray-400">
                                     Иван Иванов</p>
-                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400"620100 Моска</p>
+                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">620100 Моска</p>
                                 <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">Москва, улица Пушкина</p>
                                 <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Телефон: +7 (905) 389-33-12</p>
                             </div>
