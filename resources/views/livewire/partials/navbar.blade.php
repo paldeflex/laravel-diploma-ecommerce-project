@@ -1,4 +1,5 @@
-<header class="bg-gray-900 text-sm py-3 md:py-0 shadow-md w-full md:justify-start  text-white sticky top-0 z-50" id="header">
+<header class="bg-gray-900 text-sm py-3 md:py-0 shadow-md w-full md:justify-start  text-white sticky top-0 z-[999]
+" id="header">
     <nav class="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Глобальная навигация">
         <div class="relative md:flex md:items-center md:justify-between">
             <div class="flex items-center justify-between">
