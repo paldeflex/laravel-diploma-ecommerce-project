@@ -11,7 +11,7 @@
                             <div class="flex flex-col items-start justify-start space-y-2">
                                 <p class="text-lg font-semibold leading-4 text-left text-gray-800 dark:text-gray-400">
                                     Иван Иванов</p>
-                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">620100 Моска</p>
+                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">620100 Москва</p>
                                 <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">Москва, улица Пушкина</p>
                                 <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Телефон: +7 (905) 389-33-12</p>
                             </div>
@@ -51,20 +51,20 @@
                             <div class="flex flex-col items-center justify-center w-full pb-4 space-y-4 border-b border-gray-200 dark:border-gray-700">
                                 <div class="flex justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Подытог</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">₹157,495.00</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">157,495.00 &#8381;</p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Скидка</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">00</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">0 &#8381;</p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Доставка</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">00</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">0 &#8381;</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between w-full">
                                 <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400">Итого</p>
-                                <p class="text-base font-semibold leading-4 text-gray-600 dark:text-gray-400">₹157,495.00</p>
+                                <p class="text-base font-semibold leading-4 text-gray-600 dark:text-gray-400">157,495.00 &#8381;</p>
                             </div>
                         </div>
                         <div class="flex flex-col w-full px-5 space-y-4 md:px-8 ">
@@ -83,7 +83,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">00</p>
+                                <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">0 &#8381;</p>
                             </div>
                         </div>
                     </div>

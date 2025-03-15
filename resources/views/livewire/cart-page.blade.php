@@ -24,7 +24,7 @@
                                     <span class="font-semibold">Название товара</span>
                                 </div>
                             </td>
-                            <td class="py-4 px-2">₽1499</td>
+                            <td class="py-4 px-2">1499 &#8381;</td>
                             <td class="py-4 px-2">
                                 <div class="flex items-center">
                                     <button class="border rounded-md py-2 px-4 mr-2">-</button>
@@ -32,7 +32,7 @@
                                     <button class="border rounded-md py-2 px-4 ml-2">+</button>
                                 </div>
                             </td>
-                            <td class="py-4 px-2">₽1499</td>
+                            <td class="py-4 px-2">1499 &#8381;</td>
                             <td class="py-4 px-2">
                                 <button
                                     class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">
@@ -51,20 +51,20 @@
                 <h2 class="text-lg font-semibold mb-4">Сводка</h2>
                 <div class="flex justify-between mb-2">
                     <span>Подытог</span>
-                    <span>₽1499</span>
+                    <span>1499 &#8381;</span>
                 </div>
                 <div class="flex justify-between mb-2">
                     <span>Налоги</span>
-                    <span>₽149</span>
+                    <span>149 &#8381;</span>
                 </div>
                 <div class="flex justify-between mb-2">
                     <span>Доставка</span>
-                    <span>₽0</span>
+                    <span>0 &#8381;</span>
                 </div>
                 <hr class="my-2">
                 <div class="flex justify-between mb-2">
                     <span class="font-semibold">Итого</span>
-                    <span class="font-semibold">₽1648</span>
+                    <span class="font-semibold">1648 &#8381;</span>
                 </div>
                 <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Оформить заказ</button>
             </div>
