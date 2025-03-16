@@ -104,11 +104,11 @@
                                 <a href="/products/{{ $product->slug }}" class="w-full sm:w-1/2 md:w-1/3 p-3" wire:key="{{ $product->id }}">
                                     <div class="flex flex-col h-full border border-gray-300 dark:border-gray-700 transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
                                         <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="object-cover w-full h-56">
-                                        <div class="p-3 flex-grow">
+                                        <div class="p-3 flex flex-col flex-grow">
                                             <h3 class="text-xl font-medium dark:text-gray-400">
                                                 {{ $product->name }}
                                             </h3>
-                                            <p class="text-lg text-blue-500 font-bold">
+                                            <p class="text-lg text-blue-500 font-bold mt-auto">
                                                 {{ Number::currency($product->price, 'RUB', 'ru_RU') }}
                                             </p>
                                         </div>
