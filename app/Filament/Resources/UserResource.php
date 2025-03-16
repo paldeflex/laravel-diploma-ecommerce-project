@@ -77,11 +77,14 @@ class UserResource extends Resource
                     ->label('Имя')
                     ->searchable()
                     ->sortable()
+                    ->limit(50)
+
                     ->placeholder('Не указано'),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Электронная почта')
                     ->searchable()
                     ->sortable()
+                    ->limit(50)
                     ->placeholder('Не указано'),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->label('Дата подтверждения эл. почты')

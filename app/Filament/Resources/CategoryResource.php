@@ -95,6 +95,7 @@ class CategoryResource extends Resource
                     ->label('Название')
                     ->placeholder('Не указано')
                     ->sortable()
+                    ->limit(50)
                     ->searchable(),
                 ImageColumn::make('image_url')
                     ->label('Изображение')

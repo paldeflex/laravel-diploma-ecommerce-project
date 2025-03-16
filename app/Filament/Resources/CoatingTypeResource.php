@@ -79,15 +79,18 @@ class CoatingTypeResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Название')
                     ->placeholder('Не указано')
+                    ->limit(50)
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Человекопонятный URL')
                     ->placeholder('Не указано')
+                    ->limit(50)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Описание')
                     ->placeholder('Не указано')
+                    ->limit(50)
                     ->words(5)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_active')

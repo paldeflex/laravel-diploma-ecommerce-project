@@ -137,12 +137,15 @@ class ProductResource extends Resource
                 TextColumn::make('name')
                     ->label('Название')
                     ->searchable()
+                    ->limit(50)
                     ->sortable(),
                 TextColumn::make('slug')
                     ->label('Человекопонятный URL')
+                    ->limit(50)
                     ->searchable(),
                 TextColumn::make('category.name')
                     ->label('Категория')
+                    ->limit(50)
                     ->sortable(),
                 TextColumn::make('coatingTypes.name')
                     ->label('Тип покрытия')

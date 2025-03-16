@@ -14,6 +14,7 @@ class HomePage extends Component
     {
         $coatingTypes = CoatingType::where('is_active', 1)->get();
         $categories = Category::where('is_active', 1)->get();
+
         return view('livewire.home-page',
             [
                 'coatingTypes' => $coatingTypes,
