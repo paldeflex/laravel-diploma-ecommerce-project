@@ -81,12 +81,13 @@ class ProductResource extends Resource
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                             ->maxSize(2048)
                             ->multiple()
+                            ->reorderable()
+                            ->appendFiles()
                             ->directory('products')
                             ->maxFiles(5)
                             ->validationMessages([
                                 'max' => 'Размер файла не должен превышать 2 МБ.',
                             ])
-                            ->reorderable()
                             ->helperText('Допустимые форматы изображений: JPG, PNG, WebP. Максимальный размер: 2 МБ. Не более 5 изображений'),
                     ]),
                 ])->columnSpan(2),
@@ -131,7 +132,7 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('updated_at', 'desc')
+            ->defaultSort('is_active', 'desc')
             ->columns([
                 TextColumn::make('name')
                     ->label('Название')

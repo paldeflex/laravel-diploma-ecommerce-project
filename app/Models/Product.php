@@ -43,6 +43,28 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function getImageUrlAttribute(): string
+    {
+        if (is_array($this->images) && !empty($this->images[0])) {
+            return asset("storage/{$this->images[0]}");
+        }
+
+        return asset('images/product-not-found.webp');
+    }
+
+    public function getImagesUrlsAttribute(): array
+    {
+        if (is_array($this->images) && count($this->images) > 0) {
+            return array_map(function($image) {
+                return $image
+                    ? asset("storage/{$image}")
+                    : asset('images/product-not-found.webp');
+            }, $this->images);
+        }
+        return [asset('images/product-not-found.webp')];
+    }
+
+
     protected function casts(): array
     {
         return [
