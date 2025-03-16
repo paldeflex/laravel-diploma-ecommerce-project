@@ -61,7 +61,7 @@ class CoatingTypeResource extends Resource
                                 ->unique(CoatingType::class, 'slug', ignoreRecord: true),
                             TextInput::make('description')
                                 ->label('Описание')
-                                ->placeholder('Введите описание продукта')
+                                ->placeholder('Введите описание типа покрытия')
                                 ->maxLength(255),
                         ]),
                     Toggle::make('is_active')

@@ -4,13 +4,21 @@
             <div class="flex flex-wrap mb-24 -mx-3">
                 <div class="w-full pr-2 lg:w-1/4 lg:block">
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900">
-                        <h2 class="text-2xl font-bold dark:text-gray-400">Категории</h2>
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-bold dark:text-gray-400">Категории</h2>
+                            @if(count($selectedCategories))
+                                <a href="#" wire:click.prevent="resetCategoriesFilters" class="text-sm text-blue-500 font-bold mt-auto">
+                                    Сброс
+                                </a>
+                            @endif
+                        </div>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             @forelse($categories->take($categoriesToShow) as $category)
                                 <li class="mb-4" wire:key="{{ $category->id }}">
                                     <label for="{{$category->slug}}" class="flex items-center dark:text-gray-400 cursor-pointer">
-                                        <input type="checkbox" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]"
+                                        <input type="checkbox" wire:model.live="selectedCategories" wire:loading.delay.attr="disabled"
+                                               class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]"
                                                id="{{$category->slug}}" value="{{ $category->id }}">
                                         <span class="text-lg ml-1">{{$category->name}}</span>
                                     </label>
@@ -29,13 +37,20 @@
                         @endif
                     </div>
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-                        <h2 class="text-2xl font-bold dark:text-gray-400">Типы покрытий</h2>
+                        <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold dark:text-gray-400">Типы покрытий</h2>
+                        @if(count($selectedCoatingTypes))
+                            <a href="#" wire:click.prevent="resetCoatingTypesFilters" class="text-sm text-blue-500 font-bold mt-auto">
+                                Сброс
+                            </a>
+                        @endif
+                        </div>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             @forelse($coatingTypes->take($coatingTypesToShow) as $coatingType)
                                 <li class="mb-4" wire:key="{{ $coatingType->id }}">
                                     <label for="{{ $coatingType->slug }}" class="flex items-center dark:text-gray-300 cursor-pointer">
-                                        <input type="checkbox" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="{{ $coatingType->slug }}" value="{{ $coatingType->id }}">
+                                        <input type="checkbox" wire:model.live="selectedCoatingTypes" wire:loading.delay.attr="disabled" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="{{ $coatingType->slug }}" value="{{ $coatingType->id }}">
                                         <span class="text-lg ml-1 dark:text-gray-400">{{ $coatingType->name }}</span>
                                     </label>
                                 </li>
@@ -53,7 +68,7 @@
 
                     </div>
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-                        <h2 class="text-2xl font-bold dark:text-gray-400">Статус товара</h2>
+                        <h2 class="text-lg font-bold dark:text-gray-400">Статус товара</h2>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             <li class="mb-4">
@@ -72,7 +87,7 @@
                     </div>
 
                     <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-                        <h2 class="text-2xl font-bold dark:text-gray-400">Цена</h2>
+                        <h2 class="text-lg font-bold dark:text-gray-400">Цена</h2>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <div>
                             <input type="range"
