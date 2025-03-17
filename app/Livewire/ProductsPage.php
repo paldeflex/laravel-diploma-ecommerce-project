@@ -28,9 +28,17 @@ class ProductsPage extends Component
     #[Url]
     public $onSale;
 
+    #[Url]
+    public $priceRange;
+
     public function loadMore(): void
     {
         $this->perPage += 12;
+    }
+
+    public function mount()
+    {
+        $this->priceRange = Product::where('is_active', 1)->max('price');
     }
 
     public function loadMoreCategories(): void
@@ -75,6 +83,14 @@ class ProductsPage extends Component
         if ($this->onSale) {
             $productQuery->where('on_sale', 1);
         }
+
+        if($this->priceRange) {
+            $productQuery->whereBetween('price', [0, $this->priceRange]);
+        }
+
+        $minPrice = Product::where('is_active', 1)->min('price');
+        $maxPrice = Product::where('is_active', 1)->max('price');
+
         $categories = Category::where('is_active', 1)
             ->whereHas('products', function ($query) {
                 $query->where('is_active', 1);
@@ -98,6 +114,8 @@ class ProductsPage extends Component
             'products'     => $productQuery->orderByDesc('updated_at')->paginate($this->perPage),
             'categories'   => $categories,
             'coatingTypes' => $coatingTypes,
+            'minPrice'     => $minPrice,
+            'maxPrice'     => $maxPrice,
         ]);
     }
 }
