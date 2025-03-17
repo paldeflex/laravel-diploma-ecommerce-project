@@ -31,6 +31,9 @@ class ProductsPage extends Component
     #[Url]
     public $priceRange;
 
+    #[Url]
+    public $sort = 'latest';
+
     public function loadMore(): void
     {
         $this->perPage += 12;
@@ -86,6 +89,14 @@ class ProductsPage extends Component
 
         if($this->priceRange) {
             $productQuery->whereBetween('price', [0, $this->priceRange]);
+        }
+
+        if($this->sort == 'latest') {
+            $productQuery->latest();
+        }
+
+        if($this->sort == 'price') {
+            $productQuery->orderBy('price');
         }
 
         $minPrice = Product::where('is_active', 1)->min('price');
