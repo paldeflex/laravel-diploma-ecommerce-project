@@ -57,7 +57,7 @@
         <div class="max-w-6xl px-4 mx-auto">
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 @forelse($coatingTypes as $coatingType)
-                    <a href="#" wire:key="{{ $coatingType->id }}"
+                    <a href="/products?selectedCoatingTypes[0]={{ $coatingType->id }}" wire:key="{{ $coatingType->id }}"
                        class="block p-6 transition-transform transform bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg hover:scale-105 hover:bg-blue-50 dark:hover:bg-gray-700">
                         <h2 class="mb-2 text-2xl font-semibold text-blue-600 dark:text-blue-400">{{ $coatingType->name }}</h2>
                         <p class="text-gray-700 dark:text-gray-300">{{ $coatingType->description }}</p>
@@ -99,7 +99,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
                 @forelse($categories as $category)
                     <a wire:key="{{ $category->id }}" class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                       href="#">
+                       href="/products?selectedCategories[0]={{ $category->id }}">
                         <div class="p-4 md:p-5">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center">
