@@ -128,9 +128,26 @@
                                             <p class="text-lg text-blue-500 font-bold mt-auto">
                                                 {{ Number::currency($product->price, 'RUB', 'ru_RU') }}
                                             </p>
+                                            <div class="mt-2">
+                                                @if($product->category)
+                                                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                                                        Категория: <span class="font-medium">{{ $product->category->name }}</span>
+                                                    </div>
+                                                @endif
+                                                @if($product->coatingTypes->isNotEmpty())
+                                                    <div class="flex flex-wrap mt-1">
+                                                        @foreach($product->coatingTypes as $coatingType)
+                                                            <span class="mr-2 mb-1 px-2 py-1 bg-gray-200 text-xs rounded dark:bg-gray-700 dark:text-gray-300">
+                                {{ $coatingType->name }}
+                            </span>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
+
                             @empty
                                 <p class="text-center w-full">Товары не найдены.</p>
                             @endforelse
