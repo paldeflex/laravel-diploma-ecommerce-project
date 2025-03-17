@@ -72,14 +72,14 @@
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             <li class="mb-4">
-                                <label for="inStock" class="flex items-center dark:text-gray-300 cursor-pointer">
-                                    <input type="checkbox" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="inStock">
-                                    <span class="text-lg ml-1 dark:text-gray-400">В наличии</span>
+                                <label for="featured" class="flex items-center dark:text-gray-300 cursor-pointer">
+                                    <input type="checkbox" wire:model.live="featured" value="1" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="featured">
+                                    <span class="text-lg ml-1 dark:text-gray-400">Рекомендуемый</span>
                                 </label>
                             </li>
                             <li class="mb-4">
-                                <label for="sale" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="sale">
+                                <label for="onSale" class="flex items-center dark:text-gray-300">
+                                    <input type="checkbox" wire:model.live="onSale" class="w-4 h-4 mr-2 min-w-[16px] min-h-[16px]" id="onSale">
                                     <span class="text-lg ml-1 dark:text-gray-400">Распродажа</span>
                                 </label>
                             </li>

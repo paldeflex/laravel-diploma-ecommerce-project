@@ -23,6 +23,10 @@ class ProductsPage extends Component
 
     #[Url]
     public $selectedCoatingTypes = [];
+    #[Url]
+    public $featured;
+    #[Url]
+    public $onSale;
 
     public function loadMore(): void
     {
@@ -64,6 +68,13 @@ class ProductsPage extends Component
             });
         }
 
+        if ($this->featured) {
+            $productQuery->where('is_featured', 1);
+        }
+
+        if ($this->onSale) {
+            $productQuery->where('on_sale', 1);
+        }
         $categories = Category::where('is_active', 1)
             ->whereHas('products', function ($query) {
                 $query->where('is_active', 1);
@@ -84,9 +95,7 @@ class ProductsPage extends Component
         });
 
         return view('livewire.products-page', [
-            'products'     => $productQuery
-                ->orderByDesc('updated_at')
-                ->paginate($this->perPage),
+            'products'     => $productQuery->orderByDesc('updated_at')->paginate($this->perPage),
             'categories'   => $categories,
             'coatingTypes' => $coatingTypes,
         ]);
