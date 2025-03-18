@@ -25,7 +25,7 @@ class LoginPage extends Component
             return redirect()->intended();
         }
 
-        $this->addError('email', 'Неверные учетные данные');
+        session()->flash('error', 'Данные введены неверно, попробуйте ещё раз');
         return null;
     }
 
