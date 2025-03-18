@@ -2,9 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Category;
 use App\Models\CoatingType;
 use App\Models\Product;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -33,6 +36,25 @@ class ProductsPage extends Component
 
     #[Url]
     public $sort = 'latest';
+
+    public function addToCart($productId)
+    {
+        $totalCount = CartManagement::addItemToCart($productId);
+
+        $this->dispatch('updateCartCount', $totalCount)->to(Navbar::class);
+
+        $this->dispatch('showCartNotification', [
+            'message' => 'Товар добавлен в корзину',
+            'type' => 'success'
+        ]);
+
+        LivewireAlert::title('Товар добавлен в корзину')
+            ->success()
+            ->position('bottom-end')
+            ->timer(3000)
+            ->toast()
+            ->show();
+    }
 
     public function loadMore(): void
     {
@@ -63,7 +85,6 @@ class ProductsPage extends Component
     {
         $this->selectedCoatingTypes = [];
     }
-
 
     public function render()
     {

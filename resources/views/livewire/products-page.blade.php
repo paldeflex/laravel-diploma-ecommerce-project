@@ -137,12 +137,21 @@
                                                 @if($product->coatingTypes->isNotEmpty())
                                                     <div class="flex flex-wrap mt-1">
                                                         @foreach($product->coatingTypes as $coatingType)
-                                                            <span class="mr-2 mb-1 px-2 py-1 bg-gray-200 text-xs rounded dark:bg-gray-700 dark:text-gray-300">
-                                {{ $coatingType->name }}
-                            </span>
+                                                            <span class="mr-2 mb-1 px-2 py-1 bg-gray-200 text-xs rounded dark:bg-gray-700 dark:text-gray-300">{{ $coatingType->name }}</span>
                                                         @endforeach
                                                     </div>
                                                 @endif
+                                                    <button wire:click.prevent="addToCart({{ $product->id }})"
+                                                            class="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2"
+                                                             viewBox="0 0 20 20" fill="currentColor">
+                                                            <path
+                                                                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                                                        </svg>
+                                                        <span wire:loading.remove
+                                                              wire:target="addToCart({{ $product->id }})">В корзину</span>
+                                                        <span wire:loading wire:target="addToCart({{ $product->id }})">Добавление...</span>
+                                                    </button>
                                             </div>
                                         </div>
                                     </div>

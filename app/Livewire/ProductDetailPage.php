@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Product;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -10,10 +13,42 @@ use Livewire\Component;
 class ProductDetailPage extends Component
 {
     public $slug;
+    public $quantity = 1;
 
     public function mount($slug)
     {
         return $this->slug = $slug;
+    }
+
+    public function increaseQty()
+    {
+        $this->quantity++;
+    }
+
+    public function decreaseQty()
+    {
+        if ($this->quantity > 1) {
+            $this->quantity--;
+        }
+    }
+
+    public function addToCart($productId)
+    {
+        $totalCount = CartManagement::addItemToCart($productId);
+
+        $this->dispatch('updateCartCount', $totalCount)->to(Navbar::class);
+
+        $this->dispatch('showCartNotification', [
+            'message' => 'Товар добавлен в корзину',
+            'type' => 'success'
+        ]);
+
+        LivewireAlert::title('Товар добавлен в корзину')
+            ->success()
+            ->position('bottom-end')
+            ->timer(3000)
+            ->toast()
+            ->show();
     }
 
     public function render()
