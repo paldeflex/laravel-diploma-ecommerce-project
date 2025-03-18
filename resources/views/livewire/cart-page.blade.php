@@ -76,7 +76,7 @@
                     <span class="font-semibold">{{ Number::currency(0, 'RUB', 'ru_RU') }}</span>
                 </div>
                 @if($cartItems)
-                    <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Оформить заказ</button>
+                    <a href="/checkout" class="bg-blue-500 block text-white text-center py-2 px-4 rounded-lg mt-4 w-full">Оформить заказ</a>
                 @endif
             </div>
         </div>
