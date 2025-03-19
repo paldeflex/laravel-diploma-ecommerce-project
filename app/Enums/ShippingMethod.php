@@ -6,6 +6,7 @@ use Filament\Support\Contracts\HasLabel;
 
 enum ShippingMethod: string implements HasLabel
 {
+    case NONE = 'none';
     case POST_OFFICE = 'post_office';
     case SDEK = 'sdek';
     case BOXBERRY = 'boxberry';
@@ -14,6 +15,7 @@ enum ShippingMethod: string implements HasLabel
     public function getLabel(): ?string
     {
         return match ($this) {
+            self::NONE => 'Не выбрано',
             self::POST_OFFICE => 'Почта России',
             self::SDEK => 'СДЭК',
             self::BOXBERRY => 'Boxberry',
