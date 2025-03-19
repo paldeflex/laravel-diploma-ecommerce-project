@@ -10,10 +10,11 @@
                         <div class="flex items-center justify-center w-full pb-6 space-x-4 md:justify-start">
                             <div class="flex flex-col items-start justify-start space-y-2">
                                 <p class="text-lg font-semibold leading-4 text-left text-gray-800 dark:text-gray-400">
-                                    Иван Иванов</p>
-                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">620100 Москва</p>
-                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">Москва, улица Пушкина</p>
-                                <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Телефон: +7 (905) 389-33-12</p>
+                                    {{ $order->address->full_name }}
+                                </p>
+                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->address->street_address }}</p>
+                                <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->address->city }}, {{ $order->address->state }}, {{ $order->address->zip_code }}</p>
+                                <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Телефон: {{ $order->address->phone }}</p>
                             </div>
                         </div>
                     </div>
@@ -23,25 +24,27 @@
                         <p class="mb-2 text-sm leading-5 text-gray-600 dark:text-gray-400 ">
                             Номер заказа: </p>
                         <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400">
-                            29</p>
+                            {{ $order->id }}</p>
                     </div>
                     <div class="w-full px-4 mb-4 md:w-1/4">
                         <p class="mb-2 text-sm leading-5 text-gray-600 dark:text-gray-400 ">
-                            Дата: </p>
+                            Дата создания заказа: </p>
                         <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400">
-                            17-02-2024</p>
+                            {{ $order->created_at->locale('ru')->isoFormat('D MMMM YYYY') }}
+                        </p>
                     </div>
                     <div class="w-full px-4 mb-4 md:w-1/4">
                         <p class="mb-2 text-sm font-medium leading-5 text-gray-800 dark:text-gray-400 ">
                             Итого: </p>
                         <p class="text-base font-semibold leading-4 text-blue-600 dark:text-gray-400">
-                            157,495.00 &#8381;</p>
+                            {{ Number::currency($order->grand_total, 'RUB', 'ru_RU')}}</p>
                     </div>
                     <div class="w-full px-4 mb-4 md:w-1/4">
                         <p class="mb-2 text-sm leading-5 text-gray-600 dark:text-gray-400 ">
                             Способ оплаты: </p>
                         <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400 ">
-                            Оплата при доставке </p>
+                            {{ $order->payment_method->getLabel() }}
+                        </p>
                     </div>
                 </div>
                 <div class="px-4 mb-10">
@@ -51,20 +54,21 @@
                             <div class="flex flex-col items-center justify-center w-full pb-4 space-y-4 border-b border-gray-200 dark:border-gray-700">
                                 <div class="flex justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Подытог</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">157,495.00 &#8381;</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">
+                                        {{Number::currency($order->grand_total, 'RUB', 'ru_RU')}}</p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Скидка</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">0 &#8381;</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">{{Number::currency(0, 'RUB', 'ru_RU')}}</p>
                                 </div>
                                 <div class="flex items-center justify-between w-full">
                                     <p class="text-base leading-4 text-gray-800 dark:text-gray-400">Доставка</p>
-                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">0 &#8381;</p>
+                                    <p class="text-base leading-4 text-gray-600 dark:text-gray-400">{{Number::currency(0, 'RUB', 'ru_RU')}}</p>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between w-full">
                                 <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400">Итого</p>
-                                <p class="text-base font-semibold leading-4 text-gray-600 dark:text-gray-400">157,495.00 &#8381;</p>
+                                <p class="text-base font-semibold leading-4 text-gray-600 dark:text-gray-400">{{Number::currency($order->grand_total, 'RUB', 'ru_RU')}}</p>
                             </div>
                         </div>
                         <div class="flex flex-col w-full px-5 space-y-4 md:px-8 ">
@@ -83,7 +87,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">0 &#8381;</p>
+                                <p class="text-lg font-semibold leading-6 text-gray-800 dark:text-gray-400">{{Number::currency(0, 'RUB', 'ru_RU')}}</p>
                             </div>
                         </div>
                     </div>
@@ -92,7 +96,7 @@
                     <a href="/products" class="w-full text-center px-4 py-2 text-blue-500 border border-blue-500 rounded-md md:w-auto hover:text-white hover:bg-blue-600 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-300">
                         Вернуться к покупкам
                     </a>
-                    <a href="/orders" class="w-full text-center px-4 py-2 bg-blue-500 rounded-md text-gray-50 md:w-auto dark:text-gray-300 hover:bg-blue-600 dark:hover:bg-gray-700 dark:bg-gray-800">
+                    <a href="/my-orders" class="w-full text-center px-4 py-2 bg-blue-500 rounded-md text-gray-50 md:w-auto dark:text-gray-300 hover:bg-blue-600 dark:hover:bg-gray-700 dark:bg-gray-800">
                         Просмотреть мои заказы
                     </a>
                 </div>
