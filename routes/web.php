@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogoutController;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\LoginPage;
 use App\Livewire\Auth\RegisterPage;
@@ -31,10 +32,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/logout', function () {
-        auth()->logout();
-        return redirect('/');
-    });
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/my-orders', MyOrdersPage::class)->name('my_orders');
     Route::get('/my-orders/{order}', MyOrderDetailPage::class)->name('my_order');
