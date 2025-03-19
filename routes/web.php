@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/my-orders', MyOrdersPage::class)->name('my_orders');
-    Route::get('/my-orders/{order}', MyOrderDetailPage::class)->name('my_orders.show');
+    Route::get('/my-orders/{orderId}', MyOrderDetailPage::class)->name('my_orders.show');
     Route::get('/success', SuccessPage::class)->name('success');
     Route::get('/cancel', CancelPage::class)->name('cancel');
 });

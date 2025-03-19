@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
-                        <div>Иван Иванов</div>
+                        <div>{{ $address->first_name }}</div>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
                         <h3 class="text-xl font-medium text-gray-800 dark:text-gray-200">
-                            17.02.2024
+                            {{ $orderItems[0]->created_at->locale('ru')->isoFormat('D MMMM YYYY') }}
                         </h3>
                     </div>
                 </div>
@@ -74,7 +74,17 @@
                         </p>
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
-                        <span class="bg-yellow-500 py-1 px-3 rounded text-white shadow">В обработке</span>
+                        @php
+                            $orderStatusColor = match($order->status->getColor()) {
+                                'info' => 'bg-blue-500',
+                                'warning' => 'bg-orange-500',
+                                'success' => 'bg-green-500',
+                                'danger' => 'bg-red-500',
+                                default => 'bg-gray-500',
+                            };
+                        @endphp
+
+                        <span class="{{ $orderStatusColor }} py-1 px-3 rounded text-white shadow">{{ $order->status->getLabel() }}</span>
                     </div>
                 </div>
             </div>
@@ -100,7 +110,15 @@
                         </p>
                     </div>
                     <div class="mt-1 flex items-center gap-x-2">
-                        <span class="bg-green-500 py-1 px-3 rounded text-white shadow">Оплачено</span>
+                        @php
+                            $paymentStatusColor = match($order->payment_status->getColor()) {
+                                'warning' => 'bg-yellow-500',
+                                'success' => 'bg-green-500',
+                                'danger' => 'bg-red-500',
+                                default => 'bg-gray-500',
+                            };
+                        @endphp
+                        <span class="{{ $paymentStatusColor }} py-1 px-3 rounded text-white shadow">{{ $order->payment_status->getLabel() }}</span>
                     </div>
                 </div>
             </div>
@@ -122,36 +140,23 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <!--[if BLOCK]><![endif]-->
-                    <tr wire:key="53">
-                        <td class="py-4">
-                            <div class="flex items-center">
-                                <img class="h-16 w-16 mr-4" src="https://picsum.photos/200" alt="Изображение товара">
-                                <span class="font-semibold">Название товара 1</span>
-                            </div>
-                        </td>
-                        <td class="py-4">29,999.00 &#8381;</td>
-                        <td class="py-4">
-                            <span class="text-center w-8">1</span>
-                        </td>
-                        <td class="py-4">29,999.00 &#8381;</td>
-                    </tr>
-                    <tr wire:key="54">
-                        <td class="py-4">
-                            <div class="flex items-center">
-                                <img class="h-16 w-16 mr-4" src="https://picsum.photos/200" alt="Изображение товара">
-                                <span class="font-semibold">Название товара 2</span>
-                            </div>
-                        </td>
-                        <td class="py-4">75,000.00 &#8381;</td>
-                        <td class="py-4">
-                            <span class="text-center w-8">5</span>
-                        </td>
-                        <td class="py-4">375,000.00 &#8381;</td>
-                    </tr>
-                    <!--[if ENDBLOCK]><![endif]-->
-
+                        @foreach ($orderItems as $orderItem)
+                            <tr wire:key="{{ $orderItem->id }}">
+                                <td class="py-4">
+                                    <div class="flex items-center">
+                                        <img src="{{ $orderItem->product->image_url }}"
+                                             alt="{{ $orderItem->product->name }}"
+                                             class="w-12 h-12 object-cover rounded">
+                                        <span class="font-semibold">Название товара 1</span>
+                                    </div>
+                                </td>
+                                <td class="py-4">{{Number::currency($orderItem->unit_amount, 'RUB', 'ru_RU')}}</td>
+                                <td class="py-4">
+                                    <span class="text-center w-8">{{ $orderItem->quantity }}</span>
+                                </td>
+                                <td class="py-4">{{Number::currency($orderItem->total_amount, 'RUB', 'ru_RU')}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -160,11 +165,11 @@
                 <h1 class="font-3xl font-bold text-slate-500 mb-3">Адрес доставки</h1>
                 <div class="flex justify-between items-center">
                     <div>
-                        <p>Москва, ул. Тверская, д. 12, кв. 34</p>
+                        <p>{{ $address->street_address }}, {{ $address->city }}, {{ $address->region }}, {{$address->zip_code}}</p>
                     </div>
                     <div>
                         <p class="font-semibold">Телефон:</p>
-                        <p>+7 (495) 123-45-67</p>
+                        <p>{{ $address->phone }}</p>
                     </div>
                 </div>
             </div>
@@ -172,23 +177,9 @@
         </div>
         <div class="md:w-1/4">
             <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-lg font-semibold mb-4">Итог заказа</h2>
-                <div class="flex justify-between mb-2">
-                    <span>Итого по товарам</span>
-                    <span>404,999.00 &#8381;</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Налог</span>
-                    <span>0.00 &#8381;</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Доставка</span>
-                    <span>0.00 &#8381;</span>
-                </div>
-                <hr class="my-2">
                 <div class="flex justify-between mb-2">
                     <span class="font-semibold">Итого</span>
-                    <span class="font-semibold">404,999.00 &#8381;</span>
+                    <span class="font-semibold">{{Number::currency($order->grand_total, 'RUB', 'ru_RU')}}</span>
                 </div>
 
             </div>
