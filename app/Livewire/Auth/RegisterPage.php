@@ -12,17 +12,19 @@ use Livewire\Component;
 class RegisterPage extends Component
 {
     public $name;
+
     public $email;
+
     public $password;
 
     public function save()
     {
         $validated =
             $this->validate([
-           'name' => 'required|max:255',
-           'email' => 'required|email|unique:users|max:255',
-           'password' => 'required|min:6|max:255',
-        ]);
+                'name' => 'required|max:255',
+                'email' => 'required|email|unique:users|max:255',
+                'password' => 'required|min:6|max:255',
+            ]);
 
         $user = User::create([
             'name' => $validated['name'],

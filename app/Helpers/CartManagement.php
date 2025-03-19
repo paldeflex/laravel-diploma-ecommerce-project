@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 class CartManagement
 {
     private const string COOKIE_NAME = 'cartItems';
+
     private const int|float COOKIE_LIFETIME = 60 * 24 * 30;
 
     public static function addItemToCart(int $productId): int
@@ -32,6 +33,7 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cartItems);
+
         return count($cartItems);
     }
 
@@ -57,6 +59,7 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cartItems);
+
         return count($cartItems);
     }
 
@@ -72,6 +75,7 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cartItems);
+
         return $cartItems;
     }
 
@@ -87,6 +91,7 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cartItems);
+
         return $cartItems;
     }
 
@@ -102,6 +107,7 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cartItems);
+
         return $cartItems;
     }
 
@@ -123,6 +129,7 @@ class CartManagement
     public static function getCartItemsFromCookie(): array
     {
         $cartItems = json_decode(Cookie::get(self::COOKIE_NAME), true);
+
         return $cartItems ?: [];
     }
 
@@ -133,6 +140,7 @@ class CartManagement
                 return $index;
             }
         }
+
         return false;
     }
 }

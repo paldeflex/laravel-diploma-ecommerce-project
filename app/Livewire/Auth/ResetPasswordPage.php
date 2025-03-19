@@ -6,18 +6,21 @@ use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 #[Title('Сброс пароля - Снежинские краски')]
 class ResetPasswordPage extends Component
 {
     public $token;
+
     #[Url]
     public $email;
+
     public $password;
+
     public $password_confirmation;
 
     public function mount($token): void
@@ -53,6 +56,7 @@ class ResetPasswordPage extends Component
         }
 
         session()->flash('error', 'Что-то пошло не так');
+
         return null;
     }
 

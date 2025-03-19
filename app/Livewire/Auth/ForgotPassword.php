@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title( 'Восстановление пароля - Снежинские краски')]
+#[Title('Восстановление пароля - Снежинские краски')]
 class ForgotPassword extends Component
 {
     public $email;

@@ -18,19 +18,26 @@ use Livewire\Component;
 class CheckoutPage extends Component
 {
     public $firstName;
+
     public $lastName;
+
     public $phone;
+
     public $address;
+
     public $city;
+
     public $region;
+
     public $zipCode;
+
     public $paymentMethod;
 
     public function mount()
     {
         $cartItems = CartManagement::getCartItemsFromCookie();
 
-        if(count($cartItems) == 0) {
+        if (count($cartItems) == 0) {
             return redirect(route('products'));
         }
     }
@@ -42,6 +49,7 @@ class CheckoutPage extends Component
                 ? url('storage', $item['image'])
                 : asset('images/product-not-found.webp');
         }
+
         return $cartItems;
     }
 
@@ -71,7 +79,7 @@ class CheckoutPage extends Component
             ];
         }
 
-        $order = new Order();
+        $order = new Order;
         $order->user_id = auth()->user()->id;
         $order->grand_total = CartManagement::calculateGrandTotal($cartItems);
         $order->payment_method = $this->paymentMethod;
@@ -79,9 +87,9 @@ class CheckoutPage extends Component
         $order->status = OrderStatus::NEW;
         $order->shipping_amount = 0;
         $order->shipping_method = ShippingMethod::NONE;
-        $order->notes = 'Заказ размещен пользователем ' . auth()->user()->name;
+        $order->notes = 'Заказ размещен пользователем '.auth()->user()->name;
 
-        $address = new Address();
+        $address = new Address;
         $address->first_name = $this->firstName;
         $address->last_name = $this->lastName;
         $address->phone = $this->phone;
@@ -132,6 +140,7 @@ class CheckoutPage extends Component
         $cartItems = CartManagement::getCartItemsFromCookie();
         $cartItems = $this->addImageUrlToCartItems($cartItems);
         $grandTotal = CartManagement::calculateGrandTotal($cartItems);
+
         return view('livewire.checkout-page', [
             'cartItems' => $cartItems,
             'grandTotal' => $grandTotal,

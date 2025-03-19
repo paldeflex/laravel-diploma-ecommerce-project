@@ -8,6 +8,7 @@ use Livewire\Component;
 class LoginPage extends Component
 {
     public $email;
+
     public $password;
 
     public function save()
@@ -19,10 +20,12 @@ class LoginPage extends Component
 
         if (Auth::attempt($validated)) {
             session()->regenerate();
+
             return $this->redirectIntended(navigate: true);
         }
 
         session()->flash('error', 'Данные введены неверно, попробуйте ещё раз');
+
         return null;
     }
 

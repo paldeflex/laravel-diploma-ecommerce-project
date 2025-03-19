@@ -11,6 +11,7 @@ use Livewire\Component;
 class CartPage extends Component
 {
     public $cartItems = [];
+
     public $grandTotal;
 
     private function addImageUrlToCartItems(): void
@@ -50,6 +51,7 @@ class CartPage extends Component
         $this->grandTotal = CartManagement::calculateGrandTotal($this->cartItems);
         $this->dispatch('updateCartCount', count($this->cartItems))->to(Navbar::class);
     }
+
     public function render()
     {
         return view('livewire.cart-page');

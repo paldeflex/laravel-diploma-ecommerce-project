@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class Navbar extends Component
 {
-
     public $totalCount = 0;
 
     public function mount()

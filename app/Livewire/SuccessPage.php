@@ -9,10 +9,10 @@ use Livewire\Component;
 #[Title('Заказ успешно оформлен - Снежинские краски')]
 class SuccessPage extends Component
 {
-
     public function render()
     {
         $latestOrder = Order::with('address')->where('user_id', auth()->id())->latest()->first();
+
         return view('livewire.success-page', [
             'order' => $latestOrder,
         ]);
@@ -22,7 +22,7 @@ class SuccessPage extends Component
 
     public function mount()
     {
-        if (!session()->has('order_completed_id')) {
+        if (! session()->has('order_completed_id')) {
             return redirect()->route('checkout');
         }
 

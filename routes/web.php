@@ -23,7 +23,6 @@ Route::get('/products', ProductsPage::class)->name('products');
 Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/products/{slug}', ProductDetailPage::class)->name('product_one');
 
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', LoginPage::class)->name('login');
     Route::get('/register', RegisterPage::class)->name('register');

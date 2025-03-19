@@ -12,6 +12,7 @@ use Livewire\Component;
 class MyOrderDetailPage extends Component
 {
     public $orderId;
+
     public function mount($orderId)
     {
         $this->orderId = $orderId;

@@ -26,8 +26,10 @@ class ProductsPage extends Component
 
     #[Url]
     public $selectedCoatingTypes = [];
+
     #[Url]
     public $featured;
+
     #[Url]
     public $onSale;
 
@@ -45,7 +47,7 @@ class ProductsPage extends Component
 
         $this->dispatch('showCartNotification', [
             'message' => 'Товар добавлен в корзину',
-            'type' => 'success'
+            'type' => 'success',
         ]);
 
         LivewireAlert::title('Товар добавлен в корзину')
@@ -90,11 +92,11 @@ class ProductsPage extends Component
     {
         $productQuery = Product::where('is_active', 1);
 
-        if (!empty($this->selectedCategories)) {
+        if (! empty($this->selectedCategories)) {
             $productQuery->whereIn('category_id', $this->selectedCategories);
         }
 
-        if (!empty($this->selectedCoatingTypes)) {
+        if (! empty($this->selectedCoatingTypes)) {
             $productQuery->whereHas('coatingTypes', function ($q) {
                 $q->whereIn('coating_types.id', $this->selectedCoatingTypes);
             });
@@ -108,15 +110,15 @@ class ProductsPage extends Component
             $productQuery->where('on_sale', 1);
         }
 
-        if($this->priceRange) {
+        if ($this->priceRange) {
             $productQuery->whereBetween('price', [0, $this->priceRange]);
         }
 
-        if($this->sort == 'latest') {
+        if ($this->sort == 'latest') {
             $productQuery->latest();
         }
 
-        if($this->sort == 'price') {
+        if ($this->sort == 'price') {
             $productQuery->orderBy('price');
         }
 
@@ -143,11 +145,11 @@ class ProductsPage extends Component
         });
 
         return view('livewire.products-page', [
-            'products'     => $productQuery->orderByDesc('updated_at')->paginate($this->perPage),
-            'categories'   => $categories,
+            'products' => $productQuery->orderByDesc('updated_at')->paginate($this->perPage),
+            'categories' => $categories,
             'coatingTypes' => $coatingTypes,
-            'minPrice'     => $minPrice,
-            'maxPrice'     => $maxPrice,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
         ]);
     }
 }

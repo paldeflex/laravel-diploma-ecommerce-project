@@ -13,6 +13,7 @@ use Livewire\Component;
 class ProductDetailPage extends Component
 {
     public $slug;
+
     public $quantity = 1;
 
     public function mount($slug)
@@ -40,7 +41,7 @@ class ProductDetailPage extends Component
 
         $this->dispatch('showCartNotification', [
             'message' => 'Товар добавлен в корзину',
-            'type' => 'success'
+            'type' => 'success',
         ]);
 
         LivewireAlert::title('Товар добавлен в корзину')
