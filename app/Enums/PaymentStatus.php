@@ -18,4 +18,13 @@ enum PaymentStatus: string implements HasLabel
             self::FAILED => 'Не удалось',
         };
     }
+
+    public function getColor(): string|array|null
+    {
+        return match ($this) {
+            self::PENDING => 'warning',
+            self::PAID => 'success',
+            self::FAILED => 'danger',
+        };
+    }
 }

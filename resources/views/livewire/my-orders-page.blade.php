@@ -16,40 +16,50 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">20</td>
-                            <!-- Формат даты изменён на русский -->
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">18.02.2024</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <span class="bg-orange-500 py-1 px-3 rounded text-white shadow">В ожидании</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <span class="bg-green-500 py-1 px-3 rounded text-white shadow">Оплачено</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">12,000.00 ₽</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                <a href="/my-orders/1" class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">Посмотреть детали</a>
-                            </td>
-                        </tr>
-
-                        <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">21</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">19.02.2024</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <span class="bg-orange-500 py-1 px-3 rounded text-white shadow">В ожидании</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <span class="bg-green-500 py-1 px-3 rounded text-white shadow">Оплачено</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">15,500.00 ₽</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                <a href="#" class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">Посмотреть детали</a>
-                            </td>
-                        </tr>
+                        @forelse($orders as $order)
+                            <tr wire:key="{{ $order->id }}" class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $order->id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $order->created_at->locale('ru')->isoFormat('D MMMM YYYY') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    @php
+                                        $orderStatusColor = match($order->status->getColor()) {
+                                            'info' => 'bg-blue-500',
+                                            'warning' => 'bg-orange-500',
+                                            'success' => 'bg-green-500',
+                                            'danger' => 'bg-red-500',
+                                            default => 'bg-gray-500',
+                                        };
+                                    @endphp
+                                    <span class="{{ $orderStatusColor }} py-1 px-3 rounded text-white shadow">{{ $order->status->getLabel() }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    @php
+                                        $paymentStatusColor = match($order->payment_status->getColor()) {
+                                            'warning' => 'bg-yellow-500',
+                                            'success' => 'bg-green-500',
+                                            'danger' => 'bg-red-500',
+                                            default => 'bg-gray-500',
+                                        };
+                                    @endphp
+                                    <span class="{{ $paymentStatusColor }} py-1 px-3 rounded text-white shadow">{{ $order->payment_status->getLabel() }}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ Number::currency($order->grand_total, 'RUB', 'ru_RU')}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                    <a href="/my-orders/{{ $order->id }}" class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">Посмотреть детали</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
+                                    <p>Список заказов пуст</p>
+                                </td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
+            {{ $orders->links() }}
         </div>
     </div>
 </div>
