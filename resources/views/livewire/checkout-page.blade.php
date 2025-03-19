@@ -2,7 +2,8 @@
     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
         Оформление заказа
     </h1>
-    <div class="grid grid-cols-12 gap-4">
+    <form wire:submit.prevent="placeOrder" >
+        <div class="grid grid-cols-12 gap-4">
         <div class="md:col-span-12 lg:col-span-8 col-span-12">
             <!-- Card -->
             <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
@@ -16,52 +17,66 @@
                             <label class="block text-gray-700 dark:text-white mb-1" for="first_name">
                                 Имя
                             </label>
-                            <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="first_name" type="text">
-                            </input>
+                            <input wire:model="firstName" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('firstName') border-red-500 @enderror dark:text-white dark:border-none" id="first_name" type="text">
+                            @error('firstName')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-gray-700 dark:text-white mb-1" for="last_name">
                                 Фамилия
                             </label>
-                            <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="last_name" type="text">
-                            </input>
+                            <input wire:model="lastName" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('lastName') border-red-500 @enderror dark:text-white dark:border-none" id="last_name" type="text">
+                            @error('lastName')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="mt-4">
                         <label class="block text-gray-700 dark:text-white mb-1" for="phone">
                             Телефон
                         </label>
-                        <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="phone" type="text">
-                        </input>
+                        <input wire:model="phone" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('phone') border-red-500 @enderror dark:text-white dark:border-none" id="phone" type="text">
+                        @error('phone')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mt-4">
                         <label class="block text-gray-700 dark:text-white mb-1" for="address">
                             Адрес
                         </label>
-                        <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="address" type="text">
-                        </input>
+                        <input wire:model="address" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('address') border-red-500 @enderror dark:text-white dark:border-none" id="address" type="text">
+                        @error('address')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mt-4">
                         <label class="block text-gray-700 dark:text-white mb-1" for="city">
                             Город
                         </label>
-                        <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="city" type="text">
-                        </input>
+                        <input wire:model="city" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('city') border-red-500 @enderror dark:text-white dark:border-none" id="city" type="text">
+                        @error('city')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="grid grid-cols-2 gap-4 mt-4">
                         <div>
                             <label class="block text-gray-700 dark:text-white mb-1" for="state">
                                 Область
                             </label>
-                            <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="state" type="text">
-                            </input>
+                            <input wire:model="region" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('region') border-red-500 @enderror dark:text-white dark:border-none" id="state" type="text">
+                            @error('region')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-gray-700 dark:text-white mb-1" for="zip">
                                 Почтовый индекс
                             </label>
-                            <input class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" id="zip" type="text">
-                            </input>
+                            <input wire:model="zipCode" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 @error('zipCode') border-red-500 @enderror dark:text-white dark:border-none" id="zip" type="text">
+                            @error('zipCode')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -69,36 +84,26 @@
                     Выберите способ оплаты
                 </div>
                 <ul class="grid w-full gap-6 md:grid-cols-2">
-                    <li>
-                        <input class="hidden peer" id="hosting-small" name="hosting" required="" type="radio" value="hosting-small" />
-                        <label class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" for="hosting-small">
-                            <div class="block">
-                                <div class="w-full text-lg font-semibold">
-                                    Наложенный платеж
+                    @foreach($paymentMethods as $method)
+                        <li>
+                            <input wire:model="paymentMethod"
+                                   class="hidden peer"
+                                   id="payment-{{ $method->value }}"
+                                   required
+                                   type="radio"
+                                   value="{{ $method->value }}" />
+                            <label for="payment-{{ $method->value }}"
+                                   class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                <div class="block">
+                                    <div class="w-full text-lg font-semibold">{{ $method->getLabel() }}</div>
                                 </div>
-                            </div>
-                            <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none" viewbox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                </path>
-                            </svg>
-                        </label>
-                    </li>
-                    <li>
-                        <input class="hidden peer" id="hosting-big" name="hosting" type="radio" value="hosting-big">
-                        <label class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" for="hosting-big">
-                            <div class="block">
-                                <div class="w-full text-lg font-semibold">
-                                    ЮKassa
-                                </div>
-                            </div>
-                            <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none" viewbox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                </path>
-                            </svg>
-                        </label>
-                        </input>
-                    </li>
+                            </label>
+                        </li>
+                    @endforeach
                 </ul>
+                @error('paymentMethod')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
             </div>
             <!-- End Card -->
         </div>
@@ -109,7 +114,7 @@
                         Промежуточный итог
                     </span>
                     <span>
-                        45,000.00
+                        {{Number::currency($grandTotal, 'RUB', 'ru_RU')}}
                     </span>
                 </div>
                 <div class="flex justify-between mb-2 font-bold">
@@ -117,7 +122,7 @@
                         Налоги
                     </span>
                     <span>
-                        0.00
+                         {{Number::currency(0, 'RUB', 'ru_RU')}}
                     </span>
                 </div>
                 <div class="flex justify-between mb-2 font-bold">
@@ -125,7 +130,7 @@
                         Стоимость доставки
                     </span>
                     <span>
-                        0.00
+                        {{Number::currency(0, 'RUB', 'ru_RU')}}
                     </span>
                 </div>
                 <hr class="bg-slate-400 my-4 h-1 rounded">
@@ -134,12 +139,11 @@
                         Общая сумма
                     </span>
                     <span>
-                        45,000.00
+                        {{Number::currency($grandTotal, 'RUB', 'ru_RU')}}
                     </span>
                 </div>
-                </hr>
             </div>
-            <button class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
+            <button type="submit" class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
                 Оформить заказ
             </button>
             <div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
@@ -147,65 +151,29 @@
                     Товары в корзине
                 </div>
                 <ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
-                    <li class="py-3 sm:py-4">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img alt="Neil image" class="w-12 h-12 rounded-full" src="https://iplanet.one/cdn/shop/files/iPhone_15_Pro_Max_Blue_Titanium_PDP_Image_Position-1__en-IN_1445x.jpg?v=1695435917">
-                                </img>
+                    @foreach ($cartItems as $item)
+                        <li class="py-3 sm:py-4" wire:key="{{$item['id']}}">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <img alt="{{$item['name']}}" class="w-12 h-12 rounded-full" src="{{$item['image_url']}}">
+                                </div>
+                                <div class="flex-1 min-w-0 ms-4">
+                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                        {{$item['name']}}
+                                    </p>
+                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                        Количество: {{$item['quantity']}}
+                                    </p>
+                                </div>
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    {{Number::currency($item['totalAmount'], 'RUB', 'ru_RU')}}
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0 ms-4">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Название товара
-                                </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    Количество: 1
-                                </p>
-                            </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                320 &#8381;
-                            </div>
-                        </div>
-                    </li>
-                    <li class="py-3 sm:py-4">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img alt="Neil image" class="w-12 h-12 rounded-full" src="https://iplanet.one/cdn/shop/files/iPhone_15_Pro_Max_Blue_Titanium_PDP_Image_Position-1__en-IN_1445x.jpg?v=1695435917">
-                                </img>
-                            </div>
-                            <div class="flex-1 min-w-0 ms-4">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Название товара
-                                </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    Количество: 1
-                                </p>
-                            </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                320 &#8381;
-                            </div>
-                        </div>
-                    </li>
-                    <li class="py-3 sm:py-4">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img alt="Neil image" class="w-12 h-12 rounded-full" src="https://iplanet.one/cdn/shop/files/iPhone_15_Pro_Max_Blue_Titanium_PDP_Image_Position-1__en-IN_1445x.jpg?v=1695435917">
-                                </img>
-                            </div>
-                            <div class="flex-1 min-w-0 ms-4">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Название товара
-                                </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    Количество: 1
-                                </p>
-                            </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                320 &#8381;
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
+    </form>
 </div>
