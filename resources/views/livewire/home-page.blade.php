@@ -26,8 +26,7 @@
                     </div>
                 </div>
                 <div class="relative ms-4">
-                    <img class="w-full sm:w-4/5 md:w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-md object-cover object-center"
-                         src="{{ Vite::asset('resources/images/hero-image.webp') }}" alt="Image Description">
+                    <img src="{{ asset('images/hero-image.webp') }}" alt="Hero Image">
 
                     <div
                         class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0"></div>
