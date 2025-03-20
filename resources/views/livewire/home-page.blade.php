@@ -1,5 +1,4 @@
 <div>
-    <p>Тестовая надпись</p>
     <div
         class="flex h-screen justify-center items-center w-full bg-gradient-to-r from-blue-200 to-cyan-200 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
         <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
