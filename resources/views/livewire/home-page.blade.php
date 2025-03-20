@@ -62,7 +62,7 @@
                         <p class="text-gray-700 dark:text-gray-300">{{ $coatingType->description }}</p>
                     </a>
                 @empty
-                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center">
+                    <div class="col-span-full text-center py-10">
                         <p class="text-lg text-gray-500">
                             На данный момент типы покрытий недоступны. Пожалуйста, зайдите позже.
                         </p>
@@ -123,7 +123,7 @@
                         </div>
                     </a>
                 @empty
-                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center">
+                    <div class="col-span-full text-center py-10">
                         <p class="text-lg text-gray-500">
                             На данный момент категории недоступны. Пожалуйста, зайдите позже.
                         </p>
