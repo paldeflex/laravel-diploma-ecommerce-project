@@ -36,10 +36,6 @@
                     <div class="lg:pl-20 [&>ul]:list-disc [&>ul]:ml-4">
                         <div class="mb-8 ">
                             <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">{{ $product->name }}</h2>
-                            <p class="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
-                                <span>{{ Number::currency($product->price, 'RUB', 'ru_RU') }}</span>
-                                <span class="text-base font-normal text-gray-500 line-through dark:text-gray-400">{{ Number::currency($product->price, 'RUB', 'ru_RU') }}</span>
-                            </p>
                             <p class="max-w-md text-gray-700 dark:text-gray-400">
                                 {!! Str::markdown($product->description) !!}
                             </p>
