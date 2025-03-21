@@ -195,7 +195,7 @@
     </div>
 @else
     <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
-        <p class="text-center text-xl font-semibold text-gray-500 dark:text-gray-400">
+        <p class="text-center text-lg text-gray-500 dark:text-gray-400">
             На данный момент продукты недоступны. Пожалуйста, зайдите позже.
         </p>
     </div>

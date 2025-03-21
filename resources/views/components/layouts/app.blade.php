@@ -14,7 +14,6 @@
 <main class="flex-grow">
     {{ $slot }}
 </main>
-@livewire('partials.footer')
 @livewireScripts
 </body>
 </html>
