@@ -37,7 +37,7 @@
                         <div class="mb-8 ">
                             <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">{{ $product->name }}</h2>
                             <p class="max-w-md text-gray-700 dark:text-gray-400">
-                                {!! Str::markdown($product->description) !!}
+                                {!! str($product->description)->markdown()->sanitizeHtml() !!}
                             </p>
                         </div>
                         <div class="w-32 mb-8 ">
