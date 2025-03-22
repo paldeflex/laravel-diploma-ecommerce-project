@@ -58,22 +58,10 @@
         <div class="w-full lg:w-1/4">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-lg font-semibold mb-4">Сводка</h2>
-                <div class="flex justify-between mb-2">
-                    <span>Подытог</span>
-                    <span>{{ Number::currency($grandTotal, 'RUB', 'ru_RU') }}</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Налоги</span>
-                    <span>{{ Number::currency(0, 'RUB', 'ru_RU') }}</span>
-                </div>
-                <div class="flex justify-between mb-2">
-                    <span>Доставка</span>
-                    <span>{{ Number::currency(0, 'RUB', 'ru_RU') }}</span>
-                </div>
                 <hr class="my-2">
                 <div class="flex justify-between mb-2">
                     <span class="font-semibold">Итого</span>
-                    <span class="font-semibold">{{ Number::currency(0, 'RUB', 'ru_RU') }}</span>
+                    <span class="font-semibold">{{ Number::currency($grandTotal, 'RUB', 'ru_RU') }}</span>
                 </div>
                 @if($cartItems)
                     <a href="/checkout" class="bg-blue-500 block text-white text-center py-2 px-4 rounded-lg mt-4 w-full">
