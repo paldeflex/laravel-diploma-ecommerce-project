@@ -54,7 +54,6 @@ class ProductsPage extends Component
             ->success()
             ->position('bottom-end')
             ->timer(3000)
-            ->toast()
             ->show();
     }
 
