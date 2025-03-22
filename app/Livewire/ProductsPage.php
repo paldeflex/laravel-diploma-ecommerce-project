@@ -52,8 +52,9 @@ class ProductsPage extends Component
 
         LivewireAlert::title('Товар добавлен в корзину')
             ->success()
+            ->success()
+            ->toast()
             ->position('bottom-end')
-            ->timer(3000)
             ->show();
     }
 
