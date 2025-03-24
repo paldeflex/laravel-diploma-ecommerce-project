@@ -12,7 +12,6 @@
         "filament/forms": "^3.2",
         "filament/infolists": "^3.2",
         "filament/tables": "^3.2",
-        "jantinnerezo/livewire-alert": "^4.0",
         "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",

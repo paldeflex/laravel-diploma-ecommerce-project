@@ -7,7 +7,6 @@ use App\Livewire\Partials\Navbar;
 use App\Models\Category;
 use App\Models\CoatingType;
 use App\Models\Product;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -44,18 +43,7 @@ class ProductsPage extends Component
         $totalCount = CartManagement::addItemToCart($productId);
 
         $this->dispatch('updateCartCount', $totalCount)->to(Navbar::class);
-
-        $this->dispatch('showCartNotification', [
-            'message' => 'Товар добавлен в корзину',
-            'type' => 'success',
-        ]);
-
-        LivewireAlert::title('Товар добавлен в корзину')
-            ->success()
-            ->success()
-            ->toast()
-            ->position('bottom-end')
-            ->show();
+        $this->dispatch('product-added');
     }
 
     public function loadMore(): void

@@ -1,26 +1,18 @@
 import './bootstrap';
-import 'preline'
-import Swal from 'sweetalert2'
+import 'preline';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
-window.Swal = Swal
-
-document.addEventListener('livewire:init', () => {
-    Livewire.on('showAlert', (data) => {
-        Swal.fire({
-            icon: data[0].icon || 'success',
-            title: data[0].title || '',
-            text: data[0].text || '',
-            position: data[0].position || 'center',
-            timer: data[0].timer || null,
-            toast: data[0].toast || false,
-            showConfirmButton: data[0].showConfirmButton || false,
-            showCancelButton: data[0].showCancelButton || false,
-            showDenyButton: data[0].showDenyButton || false,
-            ...data[0].options
-        });
-    });
+window.notyf = new Notyf({
+    duration: 2500,
+    position: { x: 'right', y: 'bottom' },
 });
 
+document.addEventListener('livewire:init', () => {
+    Livewire.on('product-added', () => {
+        window.notyf.success('Товар добавлен в корзину');
+    });
+});
 
 document.addEventListener('livewire:navigated', () => {
     window.HSStaticMethods.autoInit();
