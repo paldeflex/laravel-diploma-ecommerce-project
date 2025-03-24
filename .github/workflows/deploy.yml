@@ -18,7 +18,9 @@ jobs:
           php-version: 8.4
 
       - name: Install Composer Dependencies
-        run: composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
+        run: |
+          rm -rf vendor composer.lock
+          composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
 
       - name: Install Node
         uses: actions/setup-node@v3
@@ -26,7 +28,9 @@ jobs:
           node-version: '22'
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Build NPM Assets
         run: npm run build
@@ -49,9 +53,7 @@ jobs:
           script: |
             cd /var/www/uralkraski
             sudo chown -R www-data:www-data /var/www/uralkraski
-            sudo chmod -R 775 /var/www/uralkraski/storage
-            sudo chmod -R 775 /var/www/uralkraski/bootstrap/cache
-
+            sudo chmod -R 775 storage bootstrap/cache
       - name: Run Remote/Artisan Commands
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -60,5 +62,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/uralkraski
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
             php artisan migrate --force
             php artisan optimize
