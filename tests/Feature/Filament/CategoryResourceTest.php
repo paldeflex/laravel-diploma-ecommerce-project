@@ -133,5 +133,3 @@ it('validates the maximum length for name', function () {
         ->call('create')
         ->assertHasFormErrors(['name' => ['max:255']]);
 });
-
-// TODO: тесты для slug
